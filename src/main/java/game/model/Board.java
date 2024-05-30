@@ -20,12 +20,12 @@ public class Board {
         return colIndex < 0 || colIndex >= cols;
     }
 
-    private boolean isColumnFilled(int colIndex) {
+    private int getFreeRowIndex(int colIndex) {
         int rowIndex = 0;
         while (rowIndex < rows) {
-            if (tokens[colIndex][rowIndex] == null) return false;
+            if (tokens[colIndex][rowIndex] == null) return rowIndex;
             rowIndex++;
         }
-        return true;
+        return -1;
     }
 }
