@@ -11,6 +11,15 @@ class BoardTest {
 
     private Token[][] tokens;
 
+    void fillColumn(int colIndex, int numberTokens, Token token) {
+        int rowIndex = tokens[0].length - 1;
+        while (numberTokens > 0) {
+            tokens[colIndex][rowIndex] = token;
+            numberTokens--;
+            rowIndex--;
+        }
+    }
+
     @BeforeEach
     void setUp() {
         BoardSize boardSize = BoardSize.EIGHT_BY_SEVEN;
