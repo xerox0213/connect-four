@@ -27,6 +27,10 @@ public class Board implements Observable {
         return colIndex < 0 || colIndex >= cols;
     }
 
+    private boolean isOutsideBoard(int colIndex, int rowIndex) {
+        return isOutsideBoard(colIndex) || (rowIndex >= rows);
+    }
+
     private int getFreeRowIndex(int colIndex) {
         int rowIndex = 0;
         while (rowIndex < rows) {
