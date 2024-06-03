@@ -63,6 +63,16 @@ public class Board implements Observable {
         return false;
     }
 
+    private Token[][] getCopyTokens() {
+        Token[][] copyTokens = new Token[cols][rows];
+        for (int colIndex = 0; colIndex < tokens.length; colIndex++) {
+            for (int rowIndex = 0; rowIndex < tokens[0].length; rowIndex++) {
+                copyTokens[rowIndex][colIndex] = tokens[rowIndex][colIndex];
+            }
+        }
+        return copyTokens;
+    }
+
     @Override
     public void addObserver(Observer observer) {
         observers.add(observer);
