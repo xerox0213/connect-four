@@ -34,4 +34,16 @@ class BoardTest {
         ConnectFourException e = assertThrows(ConnectFourException.class, () -> board.addToken(colIndex, token));
         assertEquals(e.getConnectFourError(), ConnectFourError.OUTSIDE_BOARD);
     }
+
+    @Test
+    void testAddTokenShouldThrowExceptionForColumnFilled() {
+        int colIndex = 0;
+        int numberOfToken = tokens[0].length;
+        Token token = Token.RED;
+        fillColumn(colIndex, numberOfToken, token);
+        Board board = new Board(tokens);
+        ConnectFourException e = assertThrows(ConnectFourException.class, () -> board.addToken(colIndex, token));
+        assertEquals(e.getConnectFourError(), ConnectFourError.COLUMN_FILLED);
+    }
+
 }
