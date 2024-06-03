@@ -5,6 +5,8 @@ import game.exception.ConnectFourException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
@@ -30,7 +32,7 @@ class BoardTest {
     public void testAddTokenShouldThrowExceptionForOutsideBoard() {
         int colIndex = 1000000;
         Token token = Token.RED;
-        Board board = new Board(tokens);
+        Board board = new Board(tokens, new HashSet<>());
         ConnectFourException e = assertThrows(ConnectFourException.class, () -> board.addToken(colIndex, token));
         assertEquals(e.getConnectFourError(), ConnectFourError.OUTSIDE_BOARD);
     }
@@ -41,14 +43,14 @@ class BoardTest {
         int numberOfToken = tokens[0].length;
         Token token = Token.RED;
         fillColumn(colIndex, numberOfToken, token);
-        Board board = new Board(tokens);
+        Board board = new Board(tokens, new HashSet<>());
         ConnectFourException e = assertThrows(ConnectFourException.class, () -> board.addToken(colIndex, token));
         assertEquals(e.getConnectFourError(), ConnectFourError.COLUMN_FILLED);
     }
 
     @Test
     void testAddTokenShouldAddToken() {
-        Board board = new Board(tokens);
+        Board board = new Board(tokens, new HashSet<>());
         int colIndex = 0;
         Token token = Token.RED;
         assertDoesNotThrow(() -> board.addToken(colIndex, token));

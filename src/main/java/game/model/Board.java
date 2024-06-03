@@ -6,7 +6,6 @@ import game.oo.ConnectFourEvent;
 import game.oo.Observable;
 import game.oo.Observer;
 
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -18,11 +17,11 @@ public class Board implements Observable {
     private final Token[][] tokens;
     private final Set<Observer> observers;
 
-    public Board(Token[][] tokens) {
+    public Board(Token[][] tokens, Set<Observer> observers) {
         cols = tokens.length;
         rows = tokens[0].length;
         this.tokens = tokens;
-        observers = new HashSet<>();
+        this.observers = observers;
     }
 
     public void addToken(int colIndex, Token token) throws ConnectFourException {
