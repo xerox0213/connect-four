@@ -40,6 +40,29 @@ public class Board implements Observable {
         return -1;
     }
 
+    private boolean isWinningMove(int tokenColIndex, int tokenRowIndex, Token playedToken) {
+        Directions[] directions = Directions.values();
+        for (Directions direction : directions) {
+            int numberTokensAligned = 1;
+            for (int i = 0; i < 2; i++) {
+                int dx = i == 0 ? direction.getDx() : direction.getOppositeDx();
+                int dy = i == 0 ? direction.getDy() : direction.getOppositeDy();
+                int colIndex = tokenColIndex + dx;
+                int rowIndex = tokenRowIndex + dy;
+                while (!isOutsideBoard(colIndex, rowIndex)) {
+                    Token token = tokens[colIndex][rowIndex];
+                    if (token == playedToken) {
+                        numberTokensAligned++;
+                        if (numberTokensAligned >= 4) return true;
+                    }
+                    colIndex += dx;
+                    rowIndex += dy;
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
     public void addObserver(Observer observer) {
         observers.add(observer);
