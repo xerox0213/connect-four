@@ -1,15 +1,13 @@
 package game.exception;
 
 public class ConnectFourException extends Exception {
+    private final ConnectFourError connectFourError;
 
-    public ConnectFourException() {
+    public ConnectFourException(ConnectFourError connectFourError) {
+        this.connectFourError = connectFourError;
     }
 
-    public ConnectFourException(String message) {
-        super(message);
-    }
-
-    public ConnectFourException(Throwable cause) {
-        super(cause);
+    public ConnectFourError getConnectFourError() {
+        return connectFourError;
     }
 }
