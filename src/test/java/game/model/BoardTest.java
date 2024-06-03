@@ -14,7 +14,7 @@ class BoardTest {
     @BeforeEach
     void setUp() {
         BoardSize boardSize = BoardSize.EIGHT_BY_SEVEN;
-        Token[][] tokens = new Token[boardSize.getCols()][boardSize.getRows()];
+        this.tokens = new Token[boardSize.getCols()][boardSize.getRows()];
     }
 
     @Test
