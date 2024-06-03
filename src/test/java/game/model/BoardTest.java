@@ -46,4 +46,14 @@ class BoardTest {
         assertEquals(e.getConnectFourError(), ConnectFourError.COLUMN_FILLED);
     }
 
+    @Test
+    void testAddTokenShouldAddToken() {
+        Board board = new Board(tokens);
+        int colIndex = 0;
+        Token token = Token.RED;
+        assertDoesNotThrow(() -> board.addToken(colIndex, token));
+        Token expected = tokens[colIndex][0];
+        assertEquals(expected, token);
+    }
+
 }
