@@ -10,10 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class BoardTest {
 
     private Board board;
+    private Token[][] tokens;
 
     @BeforeEach
     void setUp() {
-        board = new Board(BoardSize.EIGHT_BY_SEVEN);
+        BoardSize boardSize = BoardSize.EIGHT_BY_SEVEN;
+        Token[][] tokens = new Token[boardSize.getCols()][boardSize.getRows()];
+        board = new Board(tokens);
     }
 
     @Test

@@ -18,10 +18,10 @@ public class Board implements Observable {
     private final Token[][] tokens;
     private final Set<Observer> observers;
 
-    public Board(BoardSize boardSize) {
-        cols = boardSize.getCols();
-        rows = boardSize.getRows();
-        tokens = new Token[cols][rows];
+    public Board(Token[][] tokens) {
+        cols = tokens.length;
+        rows = tokens[0].length;
+        this.tokens = tokens;
         observers = new HashSet<>();
     }
 
