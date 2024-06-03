@@ -1,5 +1,7 @@
 package game.model;
 
+import game.exception.ConnectFourError;
+import game.exception.ConnectFourException;
 import game.oo.ConnectFourEvent;
 import game.oo.Observable;
 import game.oo.Observer;
@@ -21,6 +23,17 @@ public class Board implements Observable {
         rows = boardSize.getRows();
         tokens = new Token[cols][rows];
         observers = new HashSet<>();
+    }
+
+    public void addToken(int colIndex, Token token) throws ConnectFourException {
+        if (isOutsideBoard(colIndex)) throw new ConnectFourException(ConnectFourError.OUTSIDE_BOARD);
+
+        int rowIndex = getFreeRowIndex(colIndex);
+        if (rowIndex == -1) throw new ConnectFourException(ConnectFourError.COLUMN_FILLED);
+
+        tokens[colIndex][rowIndex] = token;
+        Token[][] copyTokens = getCopyTokens();
+        notifyObservers(ConnectFourEvent.BOARD_UPDATED, copyTokens);
     }
 
     private boolean isOutsideBoard(int colIndex) {
