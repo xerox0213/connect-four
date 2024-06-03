@@ -78,9 +78,7 @@ public class Board implements Observable {
     private Token[][] getCopyTokens() {
         Token[][] copyTokens = new Token[cols][rows];
         for (int colIndex = 0; colIndex < tokens.length; colIndex++) {
-            for (int rowIndex = 0; rowIndex < tokens[0].length; rowIndex++) {
-                copyTokens[colIndex][rowIndex] = tokens[colIndex][rowIndex];
-            }
+            System.arraycopy(tokens[colIndex], 0, copyTokens[colIndex], 0, tokens[0].length);
         }
         return copyTokens;
     }
