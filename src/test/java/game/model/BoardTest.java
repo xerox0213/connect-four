@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -65,5 +66,14 @@ class BoardTest {
         Token expected = tokens[colIndex][0];
         assertEquals(expected, token);
     }
+
+    @Test
+    void testAddObserverShouldAddGivenObserver() {
+        Set<Observer> observers = new HashSet<>();
+        Board board = new Board(tokens, observers);
+        board.addObserver(observer);
+        assertTrue(observers.contains(observer));
+    }
+
 
 }
