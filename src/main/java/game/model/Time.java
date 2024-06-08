@@ -1,8 +1,5 @@
 package game.model;
 
-import game.exception.ConnectFourError;
-import game.exception.ConnectFourException;
-
 public class Time {
     private long millis;
     private final long backupMillis;
@@ -12,10 +9,7 @@ public class Time {
         this.backupMillis = millis;
     }
 
-    public void reduceTime(long millis) throws ConnectFourException {
-        if (this.millis - millis <= 0) {
-            throw new ConnectFourException(ConnectFourError.NO_TIME_LEFT);
-        }
+    public void reduceTime(long millis) {
         this.millis -= millis;
     }
 
