@@ -13,4 +13,15 @@ class TimeTest {
         Time time = new Time(initialMillis);
         assertThrows(ConnectFourException.class, () -> time.reduceTime(1001));
     }
+
+    @Test
+    void testReduceTimeShouldReduceTime() {
+        long initialMillis = 2000;
+        Time time = new Time(initialMillis);
+        long millis = 1000;
+        assertDoesNotThrow(() -> time.reduceTime(millis));
+        long expected = initialMillis - millis;
+        long result = time.getMillis();
+        assertEquals(expected, result);
+    }
 }
