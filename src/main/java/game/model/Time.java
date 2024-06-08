@@ -19,4 +19,8 @@ public class Time {
         this.millis -= millis;
     }
 
+    public void reset() {
+        this.millis = backupMillis;
+    }
+
 }
