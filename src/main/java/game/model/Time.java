@@ -4,15 +4,15 @@ import game.exception.ConnectFourError;
 import game.exception.ConnectFourException;
 
 public class Time {
-    private int millis;
-    private final int backupMillis;
+    private long millis;
+    private final long backupMillis;
 
-    public Time(int millis) {
+    public Time(long millis) {
         this.millis = millis;
         this.backupMillis = millis;
     }
 
-    public void reduceTime(int millis) throws ConnectFourException {
+    public void reduceTime(long millis) throws ConnectFourException {
         if (this.millis - millis <= 0) {
             throw new ConnectFourException(ConnectFourError.NO_TIME_LEFT);
         }
@@ -23,4 +23,7 @@ public class Time {
         this.millis = backupMillis;
     }
 
+    public long getMillis() {
+        return millis;
+    }
 }
