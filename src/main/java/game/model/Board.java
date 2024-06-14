@@ -49,7 +49,7 @@ public class Board implements Observable {
     }
 
     private boolean isOutsideBoard(int colIndex, int rowIndex) {
-        return isOutsideBoard(colIndex) || (rowIndex >= rows);
+        return isOutsideBoard(colIndex) || (rowIndex < 0 || rowIndex >= rows);
     }
 
     private int getFreeRowIndex(int colIndex) {
