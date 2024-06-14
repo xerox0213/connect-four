@@ -75,6 +75,28 @@ class BoardTest {
     }
 
     @Test
+    void testAddTokenShouldReturnTrue() {
+        int colIndex = 0;
+        Token token = Token.RED;
+        fillColumn(colIndex, 3, token);
+        Set<Observer> observers = new HashSet<>();
+        Board board = new Board(tokens, observers);
+        boolean isWinningMove = assertDoesNotThrow(() -> board.addToken(colIndex, token));
+        assertTrue(isWinningMove);
+    }
+
+    @Test
+    void testAddTokenShouldReturnFalse() {
+        int colIndex = 0;
+        Token token = Token.RED;
+        fillColumn(colIndex, 2, token);
+        Set<Observer> observers = new HashSet<>();
+        Board board = new Board(tokens, observers);
+        boolean isWinningMove = assertDoesNotThrow(() -> board.addToken(colIndex, token));
+        assertFalse(isWinningMove);
+    }
+
+    @Test
     void testAddObserverShouldAddGivenObserver() {
         Set<Observer> observers = new HashSet<>();
         Board board = new Board(tokens, observers);
