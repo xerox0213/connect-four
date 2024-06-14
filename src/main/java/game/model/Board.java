@@ -35,6 +35,15 @@ public class Board implements Observable {
         notifyObservers(ConnectFourEvent.BOARD_UPDATED, copyTokens);
     }
 
+    public boolean isBoardFull() {
+        int colIndex = 0;
+        while (colIndex < cols) {
+            if (getFreeRowIndex(colIndex) != -1) return false;
+            colIndex++;
+        }
+        return true;
+    }
+
     private boolean isOutsideBoard(int colIndex) {
         return colIndex < 0 || colIndex >= cols;
     }
