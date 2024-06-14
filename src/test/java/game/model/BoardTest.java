@@ -32,6 +32,12 @@ class BoardTest {
         }
     }
 
+    void fillBoard() {
+        for (int colIndex = 0; colIndex < tokens.length; colIndex++) {
+            fillColumn(colIndex, tokens[0].length, Token.RED);
+        }
+    }
+
     @BeforeEach
     void setUp() {
         BoardSize boardSize = BoardSize.EIGHT_BY_SEVEN;
@@ -84,6 +90,23 @@ class BoardTest {
         String data = "Hello";
         board.notifyObservers(event, data);
         Mockito.verify(observer, Mockito.times(1)).update(event, data);
+    }
+
+    @Test
+    void testIsBoardFullShouldReturnTrue() {
+        fillBoard();
+        Set<Observer> observers = new HashSet<>();
+        Board board = new Board(tokens, observers);
+        boolean isBoardFull = board.isBoardFull();
+        assertTrue(isBoardFull);
+    }
+
+    @Test
+    void testIsBoardFullShouldReturnFalse() {
+        Set<Observer> observers = new HashSet<>();
+        Board board = new Board(tokens, observers);
+        boolean isBoardFull = board.isBoardFull();
+        assertFalse(isBoardFull);
     }
 
 }
