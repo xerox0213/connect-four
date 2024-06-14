@@ -53,10 +53,10 @@ public class Board implements Observable {
     }
 
     private int getFreeRowIndex(int colIndex) {
-        int rowIndex = 0;
-        while (rowIndex < rows) {
+        int rowIndex = rows - 1;
+        while (rowIndex > -1) {
             if (tokens[colIndex][rowIndex] == null) return rowIndex;
-            rowIndex++;
+            rowIndex--;
         }
         return -1;
     }

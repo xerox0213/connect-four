@@ -70,7 +70,7 @@ class BoardTest {
         int colIndex = 0;
         Token token = Token.RED;
         assertDoesNotThrow(() -> board.addToken(colIndex, token));
-        Token expected = tokens[colIndex][0];
+        Token expected = tokens[colIndex][6];
         assertEquals(expected, token);
     }
 
