@@ -24,7 +24,7 @@ public class Board implements Observable {
         this.observers = observers;
     }
 
-    public void addToken(int colIndex, Token token) throws ConnectFourException {
+    public boolean addToken(int colIndex, Token token) throws ConnectFourException {
         if (isOutsideBoard(colIndex)) throw new ConnectFourException(ConnectFourError.OUTSIDE_BOARD);
 
         int rowIndex = getFreeRowIndex(colIndex);
@@ -32,7 +32,9 @@ public class Board implements Observable {
 
         tokens[colIndex][rowIndex] = token;
         Token[][] copyTokens = getCopyTokens();
+
         notifyObservers(ConnectFourEvent.BOARD_UPDATED, copyTokens);
+        return isWinningMove(colIndex, rowIndex, token);
     }
 
     public boolean isBoardFull() {
