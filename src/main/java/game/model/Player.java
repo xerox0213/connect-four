@@ -1,5 +1,6 @@
 package game.model;
 
+import game.exception.ConnectFourException;
 import game.oo.Observer;
 
 import java.util.Set;
@@ -15,6 +16,10 @@ public class Player {
         this.token = token;
         this.time = time;
         this.observers = observers;
+    }
+
+    public void reduceTime(long millis) throws ConnectFourException {
+        time.reduceTime(millis);
     }
 
     public String getName() {
