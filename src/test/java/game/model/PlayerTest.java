@@ -2,6 +2,7 @@ package game.model;
 
 import game.exception.ConnectFourError;
 import game.exception.ConnectFourException;
+import game.oo.Observer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,6 +11,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,6 +20,8 @@ class PlayerTest {
 
     @Mock
     Time time;
+    @Mock
+    Observer observer;
 
     @BeforeEach
     void setUp() throws ConnectFourException {
@@ -37,5 +41,13 @@ class PlayerTest {
     void testReduceTimeShouldLetPassExceptionThrownByTimeObject() {
         Player player = new Player("test", Token.RED, time, new HashSet<>());
         assertThrows(ConnectFourException.class, () -> player.reduceTime(1001));
+    }
+
+    @Test
+    void testAddObserverShouldAddTheGivenObserver() {
+        Set<Observer> observers = new HashSet<>();
+        Player player = new Player("test", Token.RED, time, observers);
+        player.addObserver(observer);
+        assertTrue(observers.contains(observer));
     }
 }
