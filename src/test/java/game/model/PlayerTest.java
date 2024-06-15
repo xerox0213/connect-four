@@ -61,4 +61,14 @@ class PlayerTest {
         player.notifyObservers(event, token);
         Mockito.verify(observer, Mockito.times(1)).update(event, token);
     }
+
+    @Test
+    void testPlayShouldNotifyObserversThatItIsItsTurn() {
+        Set<Observer> observers = new HashSet<>(Set.of(observer));
+        Token token = Token.RED;
+        Player player = new Player("test", token, time, observers);
+        ConnectFourEvent event = ConnectFourEvent.MY_TURN;
+        player.notifyObservers(event, token);
+        Mockito.verify(observer, Mockito.times(1)).update(event, token);
+    }
 }
