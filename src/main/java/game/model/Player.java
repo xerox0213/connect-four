@@ -24,6 +24,10 @@ public class Player implements Observable {
         time.reduceTime(millis);
     }
 
+    public void play() {
+        notifyObservers(ConnectFourEvent.MY_TURN, token);
+    }
+
     public String getName() {
         return name;
     }
