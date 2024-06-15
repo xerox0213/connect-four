@@ -1,11 +1,13 @@
 package game.model;
 
 import game.exception.ConnectFourException;
+import game.oo.ConnectFourEvent;
+import game.oo.Observable;
 import game.oo.Observer;
 
 import java.util.Set;
 
-public class Player {
+public class Player implements Observable {
     private final String name;
     private final Token token;
     private final Time time;
@@ -28,5 +30,15 @@ public class Player {
 
     public Token getToken() {
         return token;
+    }
+
+    @Override
+    public void addObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void notifyObservers(ConnectFourEvent e, Object data) {
+        observers.forEach((observer) -> observer.update(e, data));
     }
 }
