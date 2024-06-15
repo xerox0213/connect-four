@@ -2,6 +2,7 @@ package game.model;
 
 import game.exception.ConnectFourError;
 import game.exception.ConnectFourException;
+import game.oo.ConnectFourEvent;
 import game.oo.Observer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,5 +50,15 @@ class PlayerTest {
         Player player = new Player("test", Token.RED, time, observers);
         player.addObserver(observer);
         assertTrue(observers.contains(observer));
+    }
+
+    @Test
+    void testNotifyObserversShouldNotifyObservers() {
+        Set<Observer> observers = new HashSet<>(Set.of(observer));
+        Token token = Token.RED;
+        Player player = new Player("test", token, time, observers);
+        ConnectFourEvent event = ConnectFourEvent.MY_TURN;
+        player.notifyObservers(event, token);
+        Mockito.verify(observer, Mockito.times(1)).update(event, token);
     }
 }
