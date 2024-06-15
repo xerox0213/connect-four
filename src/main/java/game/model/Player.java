@@ -28,6 +28,10 @@ public class Player implements Observable {
         notifyObservers(ConnectFourEvent.MY_TURN, token);
     }
 
+    public void notifyOpponentTurn(Token opponentToken) {
+        notifyObservers(ConnectFourEvent.OPPONENT_TURN, opponentToken);
+    }
+
     public String getName() {
         return name;
     }
