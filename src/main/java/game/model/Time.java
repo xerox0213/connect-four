@@ -17,6 +17,10 @@ public class Time {
         this.millis -= millis;
     }
 
+    public boolean isTimeLeft() {
+        return millis > 0;
+    }
+
     public void reset() {
         this.millis = backupMillis;
     }
