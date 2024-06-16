@@ -99,4 +99,13 @@ class PlayerTest {
         player.notifyPlayerWon();
         Mockito.verify(observer, Mockito.times(1)).update(event, null);
     }
+
+    @Test
+    void testNotifyDrawShouldNotifyObserverThatItIsAGameDraw() {
+        Set<Observer> observers = new HashSet<>(Set.of(observer));
+        Player player = new Player("test", Token.RED, time, observers);
+        ConnectFourEvent event = ConnectFourEvent.GAME_DRAW;
+        player.notifyDraw();
+        Mockito.verify(observer, Mockito.times(1)).update(event, null);
+    }
 }
