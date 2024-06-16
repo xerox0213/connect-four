@@ -33,6 +33,10 @@ public class PlayerManager {
         declareWinner(computeNextPlayerIndex(), indexCurrPlayer);
     }
 
+    public void declareGameDraw() {
+        players.forEach(Player::notifyDraw);
+    }
+
     private void declareWinner(int indexWinner, int indexLoser) {
         Player winner = players.get(indexWinner);
         winner.notifyPlayerWon();
