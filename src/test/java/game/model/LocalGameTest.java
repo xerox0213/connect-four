@@ -80,4 +80,14 @@ class LocalGameTest {
         localGame.play(columnIndex);
         verifyCallMethodMock(0, 1, 0, 0, 1, columnIndex);
     }
+
+    @Test
+    void testNotifyInitialGameStateShouldNotifyInitialGameState(){
+        Token[][] tokens = new Token[1][1];
+        Mockito.lenient().when(board.getCopyTokens()).thenReturn(tokens);
+        LocalGame localGame = new LocalGame(board, playerManager, roundTimer);
+        localGame.notifyInitialGameState();
+        Mockito.verify(board, Mockito.times(1)).getCopyTokens();
+        Mockito.verify(playerManager, Mockito.times(1)).notifyPlayersInitialGameState(tokens);
+    }
 }
