@@ -1,5 +1,7 @@
 package game.model;
 
+import game.exception.ConnectFourException;
+
 import java.util.List;
 
 public class PlayerManager {
@@ -17,6 +19,10 @@ public class PlayerManager {
 
     public Token getCurrPlayerToken() {
         return players.get(indexCurrPlayer).getToken();
+    }
+
+    public void reduceCurrPlayerTime(long millis) throws ConnectFourException {
+        players.get(indexCurrPlayer).reduceTime(millis);
     }
 
     private int computeNextPlayerIndex() {
