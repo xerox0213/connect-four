@@ -131,4 +131,15 @@ class PlayerTest {
         Mockito.verify(time, Mockito.times(1)).isTimeLeft();
         assertTrue(isTimeLeft);
     }
+
+    @Test
+    void testGetPlayerDtoShouldReturnPlayerDtoBasedOnThePlayer() {
+        String name = "test";
+        Token token = Token.RED;
+        long timeMillis = time.getMillis();
+        Player player = new Player(name, token, time, new HashSet<>());
+        PlayerDto expected = new PlayerDto(name, token, timeMillis);
+        PlayerDto result = player.getPlayerDto();
+        assertEquals(expected, result);
+    }
 }
