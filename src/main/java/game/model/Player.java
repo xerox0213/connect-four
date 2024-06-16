@@ -40,6 +40,10 @@ public class Player implements Observable {
         notifyObservers(ConnectFourEvent.VICTORY, null);
     }
 
+    public void notifyDraw() {
+        notifyObservers(ConnectFourEvent.GAME_DRAW, null);
+    }
+
     public String getName() {
         return name;
     }
