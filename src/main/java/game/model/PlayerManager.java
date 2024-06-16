@@ -32,6 +32,10 @@ public class PlayerManager {
         players.get(indexCurrPlayer).reduceTime(millis);
     }
 
+    public boolean hasCurrentPlayerTimeLeft() {
+        return players.get(indexCurrPlayer).isTimeLeft();
+    }
+
     public void declareCurrPlayerWinner() {
         declareWinner(indexCurrPlayer, computeNextPlayerIndex());
     }
