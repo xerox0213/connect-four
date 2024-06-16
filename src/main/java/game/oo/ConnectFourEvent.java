@@ -10,5 +10,6 @@ public enum ConnectFourEvent {
     VICTORY,
     GAME_OVER,
     GAME_DRAW,
-    GAME_INIT
+    GAME_INIT,
+    PLAYER_TIME_UPDATED,
 }
