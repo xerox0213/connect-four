@@ -21,5 +21,6 @@ class PlayerManagerTest {
     void setUp() throws ConnectFourException {
         ConnectFourException e = new ConnectFourException(ConnectFourError.NO_TIME_LEFT);
         Mockito.lenient().doThrow(e).when(zelda).reduceTime(1000);
+        Mockito.lenient().when(zelda.getToken()).thenReturn(Token.RED);
     }
 }
