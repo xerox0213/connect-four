@@ -11,4 +11,8 @@ public class PlayerManager {
         this.indexCurrPlayer = indexCurrPlayer;
     }
 
+    private int computeNextPlayerIndex() {
+        return indexCurrPlayer + 1 == players.size() ? 0 : indexCurrPlayer + 1;
+    }
+
 }
