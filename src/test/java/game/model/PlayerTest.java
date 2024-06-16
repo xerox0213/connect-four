@@ -28,6 +28,7 @@ class PlayerTest {
     void setUp() throws ConnectFourException {
         ConnectFourException e = new ConnectFourException(ConnectFourError.NO_TIME_LEFT);
         Mockito.lenient().doThrow(e).when(time).reduceTime(1001);
+        Mockito.lenient().when(time.isTimeLeft()).thenReturn(true);
     }
 
     @Test
@@ -107,5 +108,13 @@ class PlayerTest {
         ConnectFourEvent event = ConnectFourEvent.GAME_DRAW;
         player.notifyDraw();
         Mockito.verify(observer, Mockito.times(1)).update(event, null);
+    }
+
+    @Test
+    void testIsTimeLeftShouldCallMethodIsTimeLeftOfTimeObject() {
+        Player player = new Player("test", Token.RED, time, new HashSet<>());
+        boolean isTimeLeft = player.isTimeLeft();
+        Mockito.verify(time, Mockito.times(1)).isTimeLeft();
+        assertTrue(isTimeLeft);
     }
 }
