@@ -25,4 +25,18 @@ class TimeTest {
         long millis = 1001;
         assertThrows(ConnectFourException.class, () -> time.reduceTime(millis));
     }
+
+    @Test
+    void testIsTimeLeftShouldReturnTrue() {
+        long initialMillis = 1000;
+        Time time = new Time(initialMillis);
+        assertTrue(time.isTimeLeft());
+    }
+
+    @Test
+    void testIsTimeLeftShouldReturnFalse() {
+        long initialMillis = 0;
+        Time time = new Time(initialMillis);
+        assertFalse(time.isTimeLeft());
+    }
 }
