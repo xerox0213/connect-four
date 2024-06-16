@@ -12,4 +12,5 @@ public enum ConnectFourEvent {
     GAME_DRAW,
     GAME_INIT,
     PLAYER_TIME_UPDATED,
+    ROUND_TIME_UPDATED
 }
