@@ -29,6 +29,10 @@ public class PlayerManager {
         declareWinner(indexCurrPlayer, computeNextPlayerIndex());
     }
 
+    public void declareNextPlayerWinner() {
+        declareWinner(computeNextPlayerIndex(), indexCurrPlayer);
+    }
+
     private void declareWinner(int indexWinner, int indexLoser) {
         Player winner = players.get(indexWinner);
         winner.notifyPlayerWon();
