@@ -1,19 +1,25 @@
 package game.model;
 
 import game.exception.ConnectFourException;
+import game.oo.ConnectFourEvent;
+import game.oo.Observable;
+import game.oo.Observer;
 
+import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class RoundTimer {
+public class RoundTimer implements Observable {
     private final Time time;
     private final PlayerManager playerManager;
     private final ScheduledExecutorService scheduler;
+    private final Set<Observer> observers;
 
-    public RoundTimer(Time time, PlayerManager playerManager, ScheduledExecutorService scheduler) {
+    public RoundTimer(Time time, PlayerManager playerManager, ScheduledExecutorService scheduler, Set<Observer> observers) {
         this.time = time;
         this.playerManager = playerManager;
         this.scheduler = scheduler;
+        this.observers = observers;
     }
 
     public void start() {
@@ -40,4 +46,13 @@ public class RoundTimer {
         playerManager.declareNextPlayerWinner();
     }
 
+    @Override
+    public void addObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void notifyObservers(ConnectFourEvent e, Object data) {
+        observers.forEach(observer -> observer.update(e, data));
+    }
 }
