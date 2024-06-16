@@ -6,5 +6,7 @@ package game.oo;
 public enum ConnectFourEvent {
     BOARD_UPDATED,
     OPPONENT_TURN,
-    MY_TURN
+    MY_TURN,
+    VICTORY,
+    GAME_OVER
 }
