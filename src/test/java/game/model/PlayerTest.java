@@ -81,4 +81,22 @@ class PlayerTest {
         player.notifyOpponentTurn(opponentToken);
         Mockito.verify(observer, Mockito.times(1)).update(event, opponentToken);
     }
+
+    @Test
+    void testNotifyPlayerLostShouldNotifyObserverThatHeHasLost() {
+        Set<Observer> observers = new HashSet<>(Set.of(observer));
+        Player player = new Player("test", Token.RED, time, observers);
+        ConnectFourEvent event = ConnectFourEvent.GAME_OVER;
+        player.notifyPlayerLost();
+        Mockito.verify(observer, Mockito.times(1)).update(event, null);
+    }
+
+    @Test
+    void testNotifyPlayerWonShouldNotifyObserverThatHeHasWon() {
+        Set<Observer> observers = new HashSet<>(Set.of(observer));
+        Player player = new Player("test", Token.RED, time, observers);
+        ConnectFourEvent event = ConnectFourEvent.VICTORY;
+        player.notifyPlayerWon();
+        Mockito.verify(observer, Mockito.times(1)).update(event, null);
+    }
 }
