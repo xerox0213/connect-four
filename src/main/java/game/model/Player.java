@@ -54,6 +54,10 @@ public class Player implements Observable {
         return token;
     }
 
+    public void notifyInitialGameState(GameDto gameDto) {
+        notifyObservers(ConnectFourEvent.GAME_INIT, gameDto);
+    }
+
     public PlayerDto getPlayerDto() {
         return new PlayerDto(name, token, time.getMillis());
     }
