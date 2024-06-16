@@ -24,6 +24,7 @@ public class Player implements Observable {
 
     public void reduceTime(long millis) throws ConnectFourException {
         time.reduceTime(millis);
+        notifyObservers(ConnectFourEvent.PLAYER_TIME_UPDATED, getPlayerDto());
     }
 
     public boolean isTimeLeft() {
