@@ -69,4 +69,14 @@ class PlayerManagerTest {
         assertThrows(ConnectFourException.class, () -> playerManager.reduceCurrPlayerTime(millis));
     }
 
+    @Test
+    void testDeclareCurrPlayerWinnerShouldDeclareCurrPlayerWinnerAndNextPlayerLoser() {
+        List<Player> players = new ArrayList<>(List.of(link, zelda));
+        int indexCurrPlayer = 0;
+        PlayerManager playerManager = new PlayerManager(players, indexCurrPlayer);
+        playerManager.declareCurrPlayerWinner();
+        Mockito.verify(link, Mockito.times(1)).notifyPlayerWon();
+        Mockito.verify(zelda, Mockito.times(1)).notifyPlayerLost();
+    }
+
 }
