@@ -8,5 +8,6 @@ public enum ConnectFourEvent {
     OPPONENT_TURN,
     MY_TURN,
     VICTORY,
-    GAME_OVER
+    GAME_OVER,
+    GAME_DRAW
 }
