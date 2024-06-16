@@ -1,5 +1,6 @@
 package game.model;
 
+import game.dto.PlayerDto;
 import game.exception.ConnectFourError;
 import game.exception.ConnectFourException;
 import game.oo.ConnectFourEvent;
@@ -29,6 +30,7 @@ class PlayerTest {
         ConnectFourException e = new ConnectFourException(ConnectFourError.NO_TIME_LEFT);
         Mockito.lenient().doThrow(e).when(time).reduceTime(1001);
         Mockito.lenient().when(time.isTimeLeft()).thenReturn(true);
+        Mockito.lenient().when(time.getMillis()).thenReturn(1000L);
     }
 
     @Test
@@ -43,6 +45,18 @@ class PlayerTest {
     void testReduceTimeShouldLetPassExceptionThrownByTimeObject() {
         Player player = new Player("test", Token.RED, time, new HashSet<>());
         assertThrows(ConnectFourException.class, () -> player.reduceTime(1001));
+    }
+
+    @Test
+    void testReduceTimeShouldNotifyPlayerForTimeUpdated() throws ConnectFourException {
+        Set<Observer> observers = new HashSet<>(Set.of(observer));
+        String name = "test";
+        Token token = Token.RED;
+        Player player = new Player(name, token, time, observers);
+        player.reduceTime(1000);
+        ConnectFourEvent event = ConnectFourEvent.PLAYER_TIME_UPDATED;
+        PlayerDto playerDto = new PlayerDto(name, token, time.getMillis());
+        Mockito.verify(observer, Mockito.times(1)).update(event, playerDto);
     }
 
     @Test
