@@ -39,4 +39,15 @@ class PlayerManagerTest {
         Mockito.verify(previousCurrPlayer, Mockito.times(1)).notifyOpponentTurn(Token.RED);
     }
 
+    @Test
+    void testGetCurrPlayerTokenShouldReturnTokenOfTheCurrentPlayer() {
+        List<Player> players = new ArrayList<>(List.of(link, zelda));
+        int indexCurrPlayer = 1;
+        PlayerManager playerManager = new PlayerManager(players, indexCurrPlayer);
+        Token expected = Token.RED;
+        Token result = playerManager.getCurrPlayerToken();
+        Mockito.verify(zelda, Mockito.times(1)).getToken();
+        assertEquals(expected, result);
+    }
+
 }
