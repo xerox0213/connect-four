@@ -1,5 +1,7 @@
 package game.model;
 
+import game.dto.GameDto;
+import game.dto.PlayerDto;
 import game.exception.ConnectFourException;
 
 import java.util.List;
@@ -40,6 +42,16 @@ public class PlayerManager {
 
     public void declareGameDraw() {
         players.forEach(Player::notifyDraw);
+    }
+
+    public void notifyPlayersInitialGameState(Token[][] tokens) {
+        List<PlayerDto> playerDtos = players.stream().map(Player::getPlayerDto).toList();
+        Token currPlayerToken = getCurrPlayerToken();
+        for (int i = 0; i < players.size(); i++) {
+            Player player = players.get(i);
+            GameDto gameDto = new GameDto(playerDtos, tokens, currPlayerToken, i == indexCurrPlayer);
+            player.notifyInitialGameState(gameDto);
+        }
     }
 
     private void declareWinner(int indexWinner, int indexLoser) {
