@@ -46,6 +46,14 @@ public class Board implements Observable {
         return true;
     }
 
+    public Token[][] getCopyTokens() {
+        Token[][] copyTokens = new Token[cols][rows];
+        for (int colIndex = 0; colIndex < tokens.length; colIndex++) {
+            System.arraycopy(tokens[colIndex], 0, copyTokens[colIndex], 0, tokens[0].length);
+        }
+        return copyTokens;
+    }
+
     private boolean isOutsideBoard(int colIndex) {
         return colIndex < 0 || colIndex >= cols;
     }
@@ -84,14 +92,6 @@ public class Board implements Observable {
             }
         }
         return false;
-    }
-
-    private Token[][] getCopyTokens() {
-        Token[][] copyTokens = new Token[cols][rows];
-        for (int colIndex = 0; colIndex < tokens.length; colIndex++) {
-            System.arraycopy(tokens[colIndex], 0, copyTokens[colIndex], 0, tokens[0].length);
-        }
-        return copyTokens;
     }
 
     @Override
