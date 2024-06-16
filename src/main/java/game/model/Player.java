@@ -26,6 +26,10 @@ public class Player implements Observable {
         time.reduceTime(millis);
     }
 
+    public boolean isTimeLeft() {
+        return time.isTimeLeft();
+    }
+
     public void play() {
         notifyObservers(ConnectFourEvent.MY_TURN, token);
     }
