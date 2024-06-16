@@ -32,6 +32,14 @@ public class Player implements Observable {
         notifyObservers(ConnectFourEvent.OPPONENT_TURN, opponentToken);
     }
 
+    public void notifyPlayerLost() {
+        notifyObservers(ConnectFourEvent.GAME_OVER, null);
+    }
+
+    public void notifyPlayerWon() {
+        notifyObservers(ConnectFourEvent.VICTORY, null);
+    }
+
     public String getName() {
         return name;
     }
