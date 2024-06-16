@@ -60,4 +60,13 @@ class PlayerManagerTest {
         Mockito.verify(link, Mockito.times(1)).reduceTime(millis);
     }
 
+    @Test
+    void testReduceCurrPlayerTimeShouldThrowExceptionForNoTimeLeft() {
+        List<Player> players = new ArrayList<>(List.of(link, zelda));
+        int indexCurrPlayer = 1;
+        PlayerManager playerManager = new PlayerManager(players, indexCurrPlayer);
+        long millis = 1000;
+        assertThrows(ConnectFourException.class, () -> playerManager.reduceCurrPlayerTime(millis));
+    }
+
 }
