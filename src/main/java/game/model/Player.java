@@ -1,5 +1,7 @@
 package game.model;
 
+import game.dto.GameDto;
+import game.dto.PlayerDto;
 import game.exception.ConnectFourException;
 import game.oo.ConnectFourEvent;
 import game.oo.Observable;
@@ -50,6 +52,10 @@ public class Player implements Observable {
 
     public Token getToken() {
         return token;
+    }
+
+    public PlayerDto getPlayerDto() {
+        return new PlayerDto(name, token, time.getMillis());
     }
 
     @Override
