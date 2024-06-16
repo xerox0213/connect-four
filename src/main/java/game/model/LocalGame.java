@@ -32,4 +32,9 @@ public class LocalGame implements Game {
             roundTimer.start();
         }
     }
+
+    public void notifyInitialGameState() {
+        Token[][] tokens = board.getCopyTokens();
+        playerManager.notifyPlayersInitialGameState(tokens);
+    }
 }
