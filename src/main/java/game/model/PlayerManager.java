@@ -25,6 +25,13 @@ public class PlayerManager {
         players.get(indexCurrPlayer).reduceTime(millis);
     }
 
+    private void declareWinner(int indexWinner, int indexLoser) {
+        Player winner = players.get(indexWinner);
+        winner.notifyPlayerWon();
+        Player loser = players.get(indexLoser);
+        loser.notifyPlayerLost();
+    }
+
     private int computeNextPlayerIndex() {
         return indexCurrPlayer + 1 == players.size() ? 0 : indexCurrPlayer + 1;
     }
