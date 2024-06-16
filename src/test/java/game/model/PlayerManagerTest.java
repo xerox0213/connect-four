@@ -50,4 +50,14 @@ class PlayerManagerTest {
         assertEquals(expected, result);
     }
 
+    @Test
+    void testReduceCurrPlayerTimeShouldReduceTimeOfTheCurrentPlayer() throws ConnectFourException {
+        List<Player> players = new ArrayList<>(List.of(link, zelda));
+        int indexCurrPlayer = 0;
+        PlayerManager playerManager = new PlayerManager(players, indexCurrPlayer);
+        long millis = 1000;
+        assertDoesNotThrow(() -> playerManager.reduceCurrPlayerTime(millis));
+        Mockito.verify(link, Mockito.times(1)).reduceTime(millis);
+    }
+
 }
