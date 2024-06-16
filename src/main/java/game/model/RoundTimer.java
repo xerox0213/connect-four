@@ -26,6 +26,7 @@ public class RoundTimer {
     private void reduceCurrPlayerTime() {
         try {
             playerManager.reduceCurrPlayerTime(1000);
+            if (!playerManager.hasCurrentPlayerTimeLeft()) declareNextPlayerWinner();
         } catch (ConnectFourException e) {
             declareNextPlayerWinner();
         }
