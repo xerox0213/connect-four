@@ -26,6 +26,7 @@ class PlayerManagerTest {
         ConnectFourException e = new ConnectFourException(ConnectFourError.NO_TIME_LEFT);
         Mockito.lenient().doThrow(e).when(zelda).reduceTime(1000);
         Mockito.lenient().when(zelda.getToken()).thenReturn(Token.RED);
+        Mockito.lenient().when(link.isTimeLeft()).thenReturn(true);
     }
 
     @Test
@@ -97,5 +98,15 @@ class PlayerManagerTest {
         playerManager.declareGameDraw();
         Mockito.verify(link, Mockito.times(1)).notifyDraw();
         Mockito.verify(zelda, Mockito.times(1)).notifyDraw();
+    }
+
+    @Test
+    void testHasCurrentPlayerTimeLeftShouldCallIsTimeLeftMethodOfLink() {
+        List<Player> players = new ArrayList<>(List.of(link, zelda));
+        int indexCurrPlayer = 0;
+        PlayerManager playerManager = new PlayerManager(players, indexCurrPlayer);
+        boolean hasCurrentPlayerTimeLeft = playerManager.hasCurrentPlayerTimeLeft();
+        Mockito.verify(link, Mockito.times(1)).isTimeLeft();
+        assertTrue(hasCurrentPlayerTimeLeft);
     }
 }
