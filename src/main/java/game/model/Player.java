@@ -50,10 +50,6 @@ public class Player implements Observable {
         notifyObservers(ConnectFourEvent.GAME_DRAW, null);
     }
 
-    public String getName() {
-        return name;
-    }
-
     public Token getToken() {
         return token;
     }
