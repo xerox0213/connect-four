@@ -34,6 +34,7 @@ public class RoundTimer implements Observable {
     private void reduceCurrPlayerTime() {
         try {
             time.reduceTime(1000);
+            notifyObservers(ConnectFourEvent.ROUND_TIME_UPDATED, time.getMillis());
             playerManager.reduceCurrPlayerTime(1000);
             if (!playerManager.hasCurrentPlayerTimeLeft() || !time.isTimeLeft()) declareNextPlayerWinner();
         } catch (ConnectFourException e) {
