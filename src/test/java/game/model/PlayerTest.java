@@ -1,5 +1,6 @@
 package game.model;
 
+import game.dto.GameDto;
 import game.dto.PlayerDto;
 import game.exception.ConnectFourError;
 import game.exception.ConnectFourException;
@@ -141,5 +142,15 @@ class PlayerTest {
         PlayerDto expected = new PlayerDto(name, token, timeMillis);
         PlayerDto result = player.getPlayerDto();
         assertEquals(expected, result);
+    }
+
+    @Test
+    void testNotifyInitialGameStateShouldNotifyObservers() {
+        Set<Observer> observers = new HashSet<>(Set.of(observer));
+        Player player = new Player("test", Token.RED, time, observers);
+        GameDto gameDto = new GameDto(null, null, null, false);
+        ConnectFourEvent event = ConnectFourEvent.GAME_INIT;
+        player.notifyInitialGameState(gameDto);
+        Mockito.verify(observer, Mockito.times(1)).update(event, gameDto);
     }
 }
