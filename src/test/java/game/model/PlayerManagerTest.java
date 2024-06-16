@@ -89,4 +89,13 @@ class PlayerManagerTest {
         Mockito.verify(zelda, Mockito.times(1)).notifyPlayerWon();
     }
 
+    @Test
+    void testDeclareGameDrawShouldNotifyPlayersThereIsNoWinner() {
+        List<Player> players = new ArrayList<>(List.of(link, zelda));
+        int indexCurrPlayer = 0;
+        PlayerManager playerManager = new PlayerManager(players, indexCurrPlayer);
+        playerManager.declareGameDraw();
+        Mockito.verify(link, Mockito.times(1)).notifyDraw();
+        Mockito.verify(zelda, Mockito.times(1)).notifyDraw();
+    }
 }
