@@ -15,19 +15,25 @@ public class RoundTimer {
     }
 
     public void start() {
-        Runnable runnable = () -> {
-            try {
-                playerManager.reduceCurrPlayerTime(1000);
-            } catch (ConnectFourException e) {
-                playerManager.declareNextPlayerWinner();
-                stop();
-            }
-        };
+        Runnable runnable = this::reduceCurrPlayerTime;
         scheduler.scheduleAtFixedRate(runnable, 1000, 1000, TimeUnit.MILLISECONDS);
     }
 
     public void stop() {
         scheduler.shutdownNow();
+    }
+
+    private void reduceCurrPlayerTime() {
+        try {
+            playerManager.reduceCurrPlayerTime(1000);
+        } catch (ConnectFourException e) {
+            declareNextPlayerWinner();
+        }
+    }
+
+    private void declareNextPlayerWinner() {
+        stop();
+        playerManager.declareNextPlayerWinner();
     }
 
 }
