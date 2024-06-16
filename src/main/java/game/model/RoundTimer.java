@@ -6,10 +6,12 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class RoundTimer {
+    private final Time time;
     private final PlayerManager playerManager;
     private final ScheduledExecutorService scheduler;
 
-    public RoundTimer(PlayerManager playerManager, ScheduledExecutorService scheduler) {
+    public RoundTimer(Time time, PlayerManager playerManager, ScheduledExecutorService scheduler) {
+        this.time = time;
         this.playerManager = playerManager;
         this.scheduler = scheduler;
     }
