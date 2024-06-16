@@ -1,5 +1,7 @@
 package game.model;
 
+import game.dto.GameDto;
+import game.dto.PlayerDto;
 import game.exception.ConnectFourError;
 import game.exception.ConnectFourException;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,6 +29,8 @@ class PlayerManagerTest {
         Mockito.lenient().doThrow(e).when(zelda).reduceTime(1000);
         Mockito.lenient().when(zelda.getToken()).thenReturn(Token.RED);
         Mockito.lenient().when(link.isTimeLeft()).thenReturn(true);
+        Mockito.lenient().when(link.getPlayerDto()).thenReturn(new PlayerDto("link", Token.RED, 5000));
+        Mockito.lenient().when(zelda.getPlayerDto()).thenReturn(new PlayerDto("zelda", Token.BLUE, 5000));
     }
 
     @Test
@@ -108,5 +112,19 @@ class PlayerManagerTest {
         boolean hasCurrentPlayerTimeLeft = playerManager.hasCurrentPlayerTimeLeft();
         Mockito.verify(link, Mockito.times(1)).isTimeLeft();
         assertTrue(hasCurrentPlayerTimeLeft);
+    }
+
+    @Test
+    void testNotifyPlayersInitialGameStateShouldNotifyInitialGameState() {
+        Token[][] tokens = new Token[1][1];
+        List<PlayerDto> playerDtos = new ArrayList<>(List.of(link.getPlayerDto(), zelda.getPlayerDto()));
+        List<Player> players = new ArrayList<>(List.of(link, zelda));
+        int indexCurrPlayer = 0;
+        PlayerManager playerManager = new PlayerManager(players, indexCurrPlayer);
+        playerManager.notifyPlayersInitialGameState(tokens);
+        GameDto linkGameDto = new GameDto(playerDtos, tokens, link.getToken(), true);
+        Mockito.verify(link, Mockito.times(1)).notifyInitialGameState(linkGameDto);
+        GameDto zeldaGameDto = new GameDto(playerDtos, tokens, link.getToken(), false);
+        Mockito.verify(zelda, Mockito.times(1)).notifyInitialGameState(zeldaGameDto);
     }
 }
