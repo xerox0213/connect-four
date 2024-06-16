@@ -15,6 +15,10 @@ public class PlayerManager {
         indexCurrPlayer = computeNextPlayerIndex();
     }
 
+    public Token getCurrPlayerToken() {
+        return players.get(indexCurrPlayer).getToken();
+    }
+
     private int computeNextPlayerIndex() {
         return indexCurrPlayer + 1 == players.size() ? 0 : indexCurrPlayer + 1;
     }
