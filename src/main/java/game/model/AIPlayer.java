@@ -16,4 +16,11 @@ public class AIPlayer extends Player {
         this.localGame = localGame;
         this.copyTokens = copyTokens;
     }
+
+    @Override
+    public void play() {
+        super.play();
+        int columnIndex = aiStrategy.getBestMove(copyTokens, getToken());
+        localGame.play(columnIndex);
+    }
 }
