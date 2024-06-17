@@ -5,7 +5,7 @@ import game.oo.Observer;
 
 import java.util.Set;
 
-public class AIPlayer extends Player {
+public class AIPlayer extends Player implements Observer {
     private final AIStrategy aiStrategy;
     private final LocalGame localGame;
     private Token[][] copyTokens;
@@ -22,5 +22,12 @@ public class AIPlayer extends Player {
         super.play();
         int columnIndex = aiStrategy.getBestMove(copyTokens, getToken());
         localGame.play(columnIndex);
+    }
+
+    @Override
+    public void update(ConnectFourEvent e, Object data) {
+        if (e == ConnectFourEvent.BOARD_UPDATED) {
+            this.copyTokens = (Token[][]) data;
+        }
     }
 }
