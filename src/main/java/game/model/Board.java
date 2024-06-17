@@ -25,20 +25,20 @@ public class Board implements Observable {
     }
 
     public boolean addToken(int colIndex, Token token) throws ConnectFourException {
-        if (BoardAlgorithm.isOutsideBoard(tokens, colIndex)) throw new ConnectFourException(ConnectFourError.OUTSIDE_BOARD);
+        if (BoardAlgorithm.isOutsideBoard(getCopyTokens(), colIndex)) throw new ConnectFourException(ConnectFourError.OUTSIDE_BOARD);
 
-        int rowIndex = BoardAlgorithm.getFreeRowIndex(tokens, colIndex);
+        int rowIndex = BoardAlgorithm.getFreeRowIndex(getCopyTokens(), colIndex);
         if (rowIndex == -1) throw new ConnectFourException(ConnectFourError.COLUMN_FILLED);
 
         tokens[colIndex][rowIndex] = token;
         Token[][] copyTokens = getCopyTokens();
 
         notifyObservers(ConnectFourEvent.BOARD_UPDATED, copyTokens);
-        return BoardAlgorithm.isWinningMove(tokens, colIndex, rowIndex, token);
+        return BoardAlgorithm.isWinningMove(getCopyTokens(), colIndex, rowIndex, token);
     }
 
     public boolean isBoardFull() {
-        return BoardAlgorithm.isBoardFull(tokens);
+        return BoardAlgorithm.isBoardFull(getCopyTokens());
     }
 
     public Token[][] getCopyTokens() {
