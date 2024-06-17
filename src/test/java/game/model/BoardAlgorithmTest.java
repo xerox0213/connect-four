@@ -62,4 +62,38 @@ class BoardAlgorithmTest {
         int rowIndex = BoardAlgorithm.getFreeRowIndex(tokens, 1);
         assertEquals(expected, rowIndex);
     }
+
+    @Test
+    void testIsWinningMoveShouldReturnTrueCauseOfVerticalAlignment() {
+        Token[][] tokens = {{null, null, Token.BLUE, Token.BLUE, Token.BLUE}, {Token.RED, Token.BLUE, Token.RED, Token.BLUE, Token.RED}};
+        assertTrue(BoardAlgorithm.isWinningMove(tokens, 0, 1, Token.BLUE));
+    }
+
+    @Test
+    void testIsWinningMoveShouldReturnTrueBecauseHorizontalAlignment() {
+        Token[][] tokens = {{Token.RED, Token.BLUE}, {Token.RED, Token.BLUE}, {Token.RED, Token.BLUE}, {null, null}};
+        assertTrue(BoardAlgorithm.isWinningMove(tokens, 3, 1, Token.BLUE));
+    }
+
+    @Test
+    void testIsWinningMoveShouldReturnTrueBecauseDiagonalUpLeftToRightAlignment() {
+        Token[][] tokens = {{null, null, null, null}, {null, null, null, null}, {null, Token.BLUE, null, null},
+                {null, null, Token.BLUE, null}, {null, null, null, Token.BLUE}};
+
+        assertTrue(BoardAlgorithm.isWinningMove(tokens, 1, 0, Token.BLUE));
+    }
+
+    @Test
+    void testIsWinningMoveShouldReturnTrueBecauseDiagonalDownLeftToRightAlignment() {
+        Token[][] tokens = {{null, null, null, null}, {null, null, Token.BLUE, null}, {null, Token.BLUE, null, null},
+                {Token.BLUE, null, null, null}, {null, null, null, null}};
+
+        assertTrue(BoardAlgorithm.isWinningMove(tokens, 0, 3, Token.BLUE));
+    }
+
+    @Test
+    void testIsWinningMoveShouldReturnFalse(){
+        Token[][] tokens = {{null, null, null, null}, {null, null, Token.BLUE, Token.BLUE}};
+        assertFalse(BoardAlgorithm.isWinningMove(tokens, 1, 1, Token.BLUE));
+    }
 }
