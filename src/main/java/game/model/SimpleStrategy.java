@@ -1,13 +1,12 @@
 package game.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class SimpleStrategy implements AIStrategy {
     @Override
     public int getBestMove(Token[][] tokens, Token AIToken) {
-        List<Integer> colIndexes = new ArrayList<>();
+        List<Integer> blockingMoves = new ArrayList<>();
+        List<Integer> nothingMoves = new ArrayList<>();
 
         for (int colIndex = 0; colIndex < tokens.length; colIndex++) {
             int rowIndex = BoardAlgorithm.getFreeRowIndex(tokens, colIndex);
@@ -17,14 +16,18 @@ public class SimpleStrategy implements AIStrategy {
             if (isWinningMove) return colIndex;
 
             Token opponentToken = AIToken == Token.RED ? Token.BLUE : Token.RED;
-            boolean isBlockingWinningMove = BoardAlgorithm.isWinningMove(tokens, colIndex, rowIndex, opponentToken);
-            if (isBlockingWinningMove) return colIndex;
+            boolean isBlockingMove = BoardAlgorithm.isWinningMove(tokens, colIndex, rowIndex, opponentToken);
+            if (isBlockingMove) blockingMoves.add(colIndex);
 
-            colIndexes.add(colIndex);
+            nothingMoves.add(colIndex);
         }
 
-        Random random = new Random();
-        int randomIndex = random.nextInt(colIndexes.size());
-        return colIndexes.get(randomIndex);
+        if (!blockingMoves.isEmpty()) {
+            return blockingMoves.getFirst();
+        } else {
+            Random random = new Random();
+            int randomIndex = random.nextInt(nothingMoves.size());
+            return nothingMoves.get(randomIndex);
+        }
     }
 }
