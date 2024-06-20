@@ -41,4 +41,10 @@ public class JfxConfiguratorController extends Showable {
         minutesPerPlayerComboBox.getItems().setAll(playerTimes);
         minutesPerPlayerComboBox.setValue(playerTimes[0]);
     }
+
+    private void initFirstPlayerComboBox() {
+        FirstPlayer[] firstPlayers = FirstPlayer.values();
+        firstPlayerComboBox.getItems().setAll(firstPlayers);
+        firstPlayerComboBox.setValue(firstPlayers[0]);
+    }
 }
