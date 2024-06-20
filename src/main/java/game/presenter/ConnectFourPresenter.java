@@ -16,8 +16,12 @@ public class ConnectFourPresenter implements Observer {
     }
 
     public void setPlayerName(String playerName) {
-        gameRoom.setMyPlayerName(playerName);
-        connectFourView.showMenu();
+        if (playerName.isEmpty()) {
+            connectFourView.showError("Enter a valid player name !");
+        } else {
+            gameRoom.setMyPlayerName(playerName);
+            connectFourView.showMenu();
+        }
     }
 
     @Override
