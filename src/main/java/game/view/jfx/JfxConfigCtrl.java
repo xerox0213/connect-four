@@ -13,7 +13,7 @@ import javafx.scene.control.ComboBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class JfxConfiguratorController extends Showable implements Initializable {
+public class JfxConfigCtrl extends Showable implements Initializable {
     private final ConnectFourPresenter connectFourPresenter;
     @FXML
     private ComboBox<BoardSize> boardSizeComboBox;
@@ -24,7 +24,7 @@ public class JfxConfiguratorController extends Showable implements Initializable
     @FXML
     private ComboBox<FirstPlayer> firstPlayerComboBox;
 
-    public JfxConfiguratorController(ShowStrategy showStrategy, ConnectFourPresenter connectFourPresenter) {
+    public JfxConfigCtrl(ShowStrategy showStrategy, ConnectFourPresenter connectFourPresenter) {
         super(showStrategy);
         this.connectFourPresenter = connectFourPresenter;
     }
