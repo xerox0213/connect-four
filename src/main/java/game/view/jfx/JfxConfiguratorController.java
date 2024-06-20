@@ -1,5 +1,6 @@
 package game.view.jfx;
 
+import game.dto.GameConfigDto;
 import game.model.BoardSize;
 import game.model.FirstPlayer;
 import game.model.PlayerTime;
@@ -34,6 +35,20 @@ public class JfxConfiguratorController extends Showable implements Initializable
         initLapTimeComboBox();
         initMinutesPerPlayerComboBox();
         initFirstPlayerComboBox();
+    }
+
+    @FXML
+    private void handleClickContinueBtn() {
+        BoardSize boardSize = boardSizeComboBox.getValue();
+        RoundTime roundTime = lapTimeComboBox.getValue();
+        PlayerTime playerTime = minutesPerPlayerComboBox.getValue();
+        FirstPlayer firstPlayer = firstPlayerComboBox.getValue();
+        GameConfigDto gameConfigDto = new GameConfigDto(boardSize, playerTime, roundTime, firstPlayer);
+        boardSizeComboBox.setValue(BoardSize.values()[0]);
+        lapTimeComboBox.setValue(RoundTime.values()[0]);
+        minutesPerPlayerComboBox.setValue(PlayerTime.values()[0]);
+        firstPlayerComboBox.setValue(FirstPlayer.values()[0]);
+        connectFourPresenter.createGame(gameConfigDto);
     }
 
     private void initBoardSizeComboBox() {
