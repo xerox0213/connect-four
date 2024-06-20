@@ -29,7 +29,11 @@ public class PlayerManager {
     }
 
     public void reduceCurrPlayerTime(long millis) throws ConnectFourException {
-        players.get(indexCurrPlayer).reduceTime(millis);
+        Player currPlayer = players.get(indexCurrPlayer);
+        currPlayer.reduceTime(millis);
+        PlayerDto currPlayerDto = currPlayer.getPlayerDto();
+        Player nextPlayer = players.get(computeNextPlayerIndex());
+        nextPlayer.notifyOpponentTimeUpdated(currPlayerDto);
     }
 
     public boolean hasCurrentPlayerTimeLeft() {
