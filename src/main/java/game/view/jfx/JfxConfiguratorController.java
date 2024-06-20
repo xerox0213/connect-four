@@ -23,4 +23,10 @@ public class JfxConfiguratorController extends Showable {
         super(showStrategy);
         this.connectFourPresenter = connectFourPresenter;
     }
+
+    private void initBoardSizeComboBox() {
+        BoardSize[] boardSizes = BoardSize.values();
+        boardSizeComboBox.getItems().setAll(boardSizes);
+        boardSizeComboBox.setValue(boardSizes[0]);
+    }
 }
