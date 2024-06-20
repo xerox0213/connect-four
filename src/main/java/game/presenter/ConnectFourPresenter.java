@@ -24,6 +24,10 @@ public class ConnectFourPresenter implements Observer {
         }
     }
 
+    public void configureGame() {
+        connectFourView.showConfigurator();
+    }
+
     @Override
     public void update(ConnectFourEvent e, Object data) {
 
