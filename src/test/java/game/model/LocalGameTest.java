@@ -82,12 +82,13 @@ class LocalGameTest {
     }
 
     @Test
-    void testNotifyInitialGameStateShouldNotifyInitialGameState(){
+    void testStartShouldStartTheGame(){
         Token[][] tokens = new Token[1][1];
         Mockito.lenient().when(board.getCopyTokens()).thenReturn(tokens);
         LocalGame localGame = new LocalGame(board, playerManager, roundTimer);
-        localGame.notifyInitialGameState();
+        localGame.start();
         Mockito.verify(board, Mockito.times(1)).getCopyTokens();
         Mockito.verify(playerManager, Mockito.times(1)).notifyPlayersInitialGameState(tokens);
+        Mockito.verify(roundTimer, Mockito.times(1)).start();
     }
 }
