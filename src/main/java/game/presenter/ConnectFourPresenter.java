@@ -1,5 +1,6 @@
 package game.presenter;
 
+import game.dto.GameConfigDto;
 import game.model.Game;
 import game.model.GameRoom;
 import game.oo.ConnectFourEvent;
@@ -28,6 +29,12 @@ public class ConnectFourPresenter implements Observer {
     public void configureGame(boolean isItAgainstComputer) {
         this.isItAgainstComputer = isItAgainstComputer;
         connectFourView.showConfigurator();
+    }
+
+    public void createGame(GameConfigDto gameConfigDto) {
+        if (isItAgainstComputer) {
+            game = gameRoom.playAgainstComputer(gameConfigDto, this);
+        }
     }
 
     @Override
