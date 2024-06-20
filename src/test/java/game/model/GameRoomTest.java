@@ -36,4 +36,12 @@ class GameRoomTest {
         gameRoom = new GameRoom(gameFactory);
         playerName = "Link";
     }
+
+    @Test
+    void testPlayAgainstComputerShouldReturnGameAgainstComputer() {
+        gameRoom.setMyPlayerName(playerName);
+        Game result = gameRoom.playAgainstComputer(gameConfigDto, observer);
+        Mockito.verify(gameFactory, Mockito.times(1)).createGame(gameConfigDto, playerName, "Bip Boop", observer, null);
+        assertEquals(gameAgainstComputer, result);
+    }
 }
