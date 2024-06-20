@@ -16,7 +16,7 @@ public class JfxMenuController extends Showable {
 
     @FXML
     private void handleClickPlayAgainstComputerBtn() {
-        connectFourPresenter.configureGame();
+        connectFourPresenter.configureGame(true);
     }
 
 }

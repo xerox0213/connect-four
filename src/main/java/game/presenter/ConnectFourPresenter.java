@@ -10,6 +10,7 @@ public class ConnectFourPresenter implements Observer {
     private final GameRoom gameRoom;
     private Game game;
     private ConnectFourView connectFourView;
+    private boolean isItAgainstComputer;
 
     public ConnectFourPresenter(GameRoom gameRoom) {
         this.gameRoom = gameRoom;
@@ -24,7 +25,8 @@ public class ConnectFourPresenter implements Observer {
         }
     }
 
-    public void configureGame() {
+    public void configureGame(boolean isItAgainstComputer) {
+        this.isItAgainstComputer = isItAgainstComputer;
         connectFourView.showConfigurator();
     }
 
