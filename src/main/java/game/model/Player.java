@@ -27,6 +27,10 @@ public class Player implements Observable {
         notifyObservers(ConnectFourEvent.PLAYER_TIME_UPDATED, getPlayerDto());
     }
 
+    public void notifyOpponentTimeUpdated(PlayerDto opponentPlayerDto) {
+        notifyObservers(ConnectFourEvent.PLAYER_TIME_UPDATED, opponentPlayerDto);
+    }
+
     public boolean isTimeLeft() {
         return time.isTimeLeft();
     }
