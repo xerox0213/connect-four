@@ -35,4 +35,10 @@ public class JfxConfiguratorController extends Showable {
         lapTimeComboBox.getItems().setAll(roundTimes);
         lapTimeComboBox.setValue(roundTimes[0]);
     }
+
+    private void initMinutesPerPlayerComboBox() {
+        PlayerTime[] playerTimes = PlayerTime.values();
+        minutesPerPlayerComboBox.getItems().setAll(playerTimes);
+        minutesPerPlayerComboBox.setValue(playerTimes[0]);
+    }
 }
