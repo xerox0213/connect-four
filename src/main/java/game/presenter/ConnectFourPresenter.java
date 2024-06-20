@@ -17,6 +17,7 @@ public class ConnectFourPresenter implements Observer {
 
     public void setPlayerName(String playerName) {
         gameRoom.setMyPlayerName(playerName);
+        connectFourView.showMenu();
     }
 
     @Override
