@@ -10,4 +10,8 @@ public class ConnectFourPresenter {
     public ConnectFourPresenter(GameRoom gameRoom) {
         this.gameRoom = gameRoom;
     }
+
+    public void setPlayerName(String playerName) {
+        gameRoom.setMyPlayerName(playerName);
+    }
 }
