@@ -16,4 +16,10 @@ public class JfxHomeController extends Showable {
         super(showStrategy);
         this.connectFourPresenter = connectFourPresenter;
     }
+
+    @FXML
+    public void handleConfirmPlayerName() {
+        String playerName = playerNameLabel.getText();
+        connectFourPresenter.setPlayerName(playerName);
+    }
 }
