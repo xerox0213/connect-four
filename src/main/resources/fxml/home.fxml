@@ -20,12 +20,12 @@
       </ImageView>
       <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <TextField fx:id="nameLabel" alignment="TOP_CENTER" maxWidth="-Infinity" promptText="Enter your name">
+            <TextField fx:id="playerNameLabel" alignment="TOP_CENTER" maxWidth="-Infinity" promptText="Enter your name">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
             </TextField>
-            <Button fx:id="confirmNameBtn" mnemonicParsing="false" text="Confirm" />
+            <Button fx:id="confirmPlayerNameBtn" mnemonicParsing="false" text="Confirm" />
          </children>
       </HBox>
    </children>
