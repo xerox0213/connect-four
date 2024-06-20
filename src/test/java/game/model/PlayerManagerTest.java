@@ -66,6 +66,17 @@ class PlayerManagerTest {
     }
 
     @Test
+    void testReduceCurrPlayerTimeShouldNotifyTheOpponent() {
+        List<Player> players = new ArrayList<>(List.of(link, zelda));
+        int indexCurrPlayer = 0;
+        PlayerManager playerManager = new PlayerManager(players, indexCurrPlayer);
+        long millis = 1000;
+        PlayerDto playerDto = new PlayerDto("link", Token.RED, 5000);
+        assertDoesNotThrow(() -> playerManager.reduceCurrPlayerTime(millis));
+        Mockito.verify(zelda, Mockito.times(1)).notifyOpponentTimeUpdated(playerDto);
+    }
+
+    @Test
     void testReduceCurrPlayerTimeShouldThrowExceptionForNoTimeLeft() {
         List<Player> players = new ArrayList<>(List.of(link, zelda));
         int indexCurrPlayer = 1;
