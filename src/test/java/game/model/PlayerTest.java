@@ -153,4 +153,14 @@ class PlayerTest {
         player.notifyInitialGameState(gameDto);
         Mockito.verify(observer, Mockito.times(1)).update(event, gameDto);
     }
+
+    @Test
+    void testNotifyOpponentTimeUpdatedShouldNotifyObservers() {
+        Set<Observer> observers = new HashSet<>(Set.of(observer));
+        Player player = new Player("test", Token.RED, time, observers);
+        PlayerDto opponentPlayerDto = new PlayerDto("zelda", Token.BLUE, 1000);
+        ConnectFourEvent e = ConnectFourEvent.PLAYER_TIME_UPDATED;
+        player.notifyOpponentTimeUpdated(opponentPlayerDto);
+        Mockito.verify(observer, Mockito.times(1)).update(e, opponentPlayerDto);
+    }
 }
