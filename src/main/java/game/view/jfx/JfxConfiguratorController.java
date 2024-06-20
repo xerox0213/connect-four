@@ -29,4 +29,10 @@ public class JfxConfiguratorController extends Showable {
         boardSizeComboBox.getItems().setAll(boardSizes);
         boardSizeComboBox.setValue(boardSizes[0]);
     }
+
+    private void initLapTimeComboBox() {
+        RoundTime[] roundTimes = RoundTime.values();
+        lapTimeComboBox.getItems().setAll(roundTimes);
+        lapTimeComboBox.setValue(roundTimes[0]);
+    }
 }
