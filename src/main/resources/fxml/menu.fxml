@@ -17,7 +17,7 @@
             <Insets bottom="30.0" />
          </VBox.margin>
       </ImageView>
-      <Button fx:id="playAgainstComputerBtn" mnemonicParsing="false" onAction="#handleClickPlayAgainstComputerBtn" text="Play against computer">
+      <Button mnemonicParsing="false" onAction="#handleClickPlayAgainstComputerBtn" text="Play against computer">
          <font>
             <Font size="17.0" />
          </font>
@@ -25,7 +25,7 @@
             <Insets bottom="10.0" />
          </VBox.margin>
       </Button>
-      <Button fx:id="playWithFriendBtn" mnemonicParsing="false" text="Play with a friend">
+      <Button mnemonicParsing="false" text="Play with a friend">
          <font>
             <Font size="17.0" />
          </font>
