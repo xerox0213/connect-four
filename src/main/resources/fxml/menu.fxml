@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.view.jfx.JfxMenuController">
    <children>
       <ImageView fitHeight="119.0" fitWidth="326.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -17,7 +17,7 @@
             <Insets bottom="30.0" />
          </VBox.margin>
       </ImageView>
-      <Button fx:id="playAgainstComputerBtn" mnemonicParsing="false" text="Play against computer">
+      <Button fx:id="playAgainstComputerBtn" mnemonicParsing="false" onAction="#handleClickPlayAgainstComputerBtn" text="Play against computer">
          <font>
             <Font size="17.0" />
          </font>
