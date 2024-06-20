@@ -6,9 +6,13 @@ import game.model.PlayerTime;
 import game.model.RoundTime;
 import game.presenter.ConnectFourPresenter;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 
-public class JfxConfiguratorController extends Showable {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class JfxConfiguratorController extends Showable implements Initializable {
     private final ConnectFourPresenter connectFourPresenter;
     @FXML
     private ComboBox<BoardSize> boardSizeComboBox;
@@ -22,6 +26,14 @@ public class JfxConfiguratorController extends Showable {
     public JfxConfiguratorController(ShowStrategy showStrategy, ConnectFourPresenter connectFourPresenter) {
         super(showStrategy);
         this.connectFourPresenter = connectFourPresenter;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        initBoardSizeComboBox();
+        initLapTimeComboBox();
+        initMinutesPerPlayerComboBox();
+        initFirstPlayerComboBox();
     }
 
     private void initBoardSizeComboBox() {
