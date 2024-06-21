@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * Represents the game board for Connect Four.
  */
-public class Board implements Observable {
+public class Board implements Observable, BoardView {
     private final int cols;
     private final int rows;
     private final Token[][] tokens;
@@ -41,6 +41,7 @@ public class Board implements Observable {
         return BoardAlgorithm.isBoardFull(getCopyTokens());
     }
 
+    @Override
     public Token[][] getCopyTokens() {
         Token[][] copyTokens = new Token[cols][rows];
         for (int colIndex = 0; colIndex < tokens.length; colIndex++) {
