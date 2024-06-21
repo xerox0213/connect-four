@@ -7,13 +7,12 @@ import java.util.Set;
 
 public class AIPlayer extends Player implements Observer {
     private final AIStrategy aiStrategy;
-    private final LocalGame localGame;
     private Token[][] copyTokens;
+    private LocalGame localGame;
 
-    public AIPlayer(String name, Token token, Time time, Set<Observer> observers, AIStrategy aiStrategy, LocalGame localGame, Token[][] copyTokens) {
+    public AIPlayer(String name, Token token, Time time, Set<Observer> observers, AIStrategy aiStrategy, Token[][] copyTokens) {
         super(name, token, time, observers);
         this.aiStrategy = aiStrategy;
-        this.localGame = localGame;
         this.copyTokens = copyTokens;
     }
 
@@ -29,5 +28,9 @@ public class AIPlayer extends Player implements Observer {
         if (e == ConnectFourEvent.BOARD_UPDATED) {
             this.copyTokens = (Token[][]) data;
         }
+    }
+
+    public void setLocalGame(LocalGame localGame) {
+        this.localGame = localGame;
     }
 }
