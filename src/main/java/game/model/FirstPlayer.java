@@ -1,7 +1,7 @@
 package game.model;
 
 public enum FirstPlayer {
-    ME("I play first"),
+    HOST("I play first"),
     OPPONENT("Opponent plays first"),
     RANDOM("Random");
 
