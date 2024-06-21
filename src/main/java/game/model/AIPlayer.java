@@ -1,33 +1,25 @@
 package game.model;
 
-import game.oo.ConnectFourEvent;
 import game.oo.Observer;
 
 import java.util.Set;
 
-public class AIPlayer extends Player implements Observer {
+public class AIPlayer extends Player {
     private final AIStrategy aiStrategy;
-    private Token[][] copyTokens;
     private LocalGame localGame;
+    private final BoardView boardView;
 
-    public AIPlayer(String name, Token token, Time time, Set<Observer> observers, AIStrategy aiStrategy, Token[][] copyTokens) {
+    public AIPlayer(String name, Token token, Time time, Set<Observer> observers, AIStrategy aiStrategy, BoardView boardView) {
         super(name, token, time, observers);
         this.aiStrategy = aiStrategy;
-        this.copyTokens = copyTokens;
+        this.boardView = boardView;
     }
 
     @Override
     public void play() {
         super.play();
-        int columnIndex = aiStrategy.getBestMove(copyTokens, getToken());
+        int columnIndex = aiStrategy.getBestMove(boardView.getCopyTokens(), getToken());
         localGame.play(columnIndex);
-    }
-
-    @Override
-    public void update(ConnectFourEvent e, Object data) {
-        if (e == ConnectFourEvent.BOARD_UPDATED) {
-            this.copyTokens = (Token[][]) data;
-        }
     }
 
     public void setLocalGame(LocalGame localGame) {
