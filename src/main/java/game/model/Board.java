@@ -1,5 +1,6 @@
 package game.model;
 
+import game.dto.MoveDto;
 import game.exception.ConnectFourError;
 import game.exception.ConnectFourException;
 import game.oo.ConnectFourEvent;
@@ -31,9 +32,8 @@ public class Board implements Observable, BoardView {
         if (rowIndex == -1) throw new ConnectFourException(ConnectFourError.COLUMN_FILLED);
 
         tokens[colIndex][rowIndex] = token;
-        Token[][] copyTokens = getCopyTokens();
 
-        notifyObservers(ConnectFourEvent.BOARD_UPDATED, copyTokens);
+        notifyObservers(ConnectFourEvent.BOARD_UPDATED, new MoveDto(token, colIndex, rowIndex));
         return BoardAlgorithm.isWinningMove(getCopyTokens(), colIndex, rowIndex, token);
     }
 
