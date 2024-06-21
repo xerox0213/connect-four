@@ -28,6 +28,7 @@ class LocalGameTest {
         ConnectFourException e2 = new ConnectFourException(ConnectFourError.COLUMN_FILLED);
         Mockito.lenient().doThrow(e2).when(board).addToken(5, Token.RED);
         Mockito.lenient().when(board.addToken(1, Token.RED)).thenReturn(true);
+        Mockito.lenient().when(roundTimer.getMillis()).thenReturn(1000L);
     }
 
     void verifyCallMethodMock(int nStart, int nIsBoardFull, int nNextPlayer, int nCurrPlayerWinner, int nGameDraw, int columnIndex) throws ConnectFourException {
@@ -88,7 +89,7 @@ class LocalGameTest {
         LocalGame localGame = new LocalGame(board, playerManager, roundTimer);
         localGame.start();
         Mockito.verify(board, Mockito.times(1)).getCopyTokens();
-        Mockito.verify(playerManager, Mockito.times(1)).notifyPlayersInitialGameState(tokens);
+        Mockito.verify(playerManager, Mockito.times(1)).notifyPlayersInitialGameState(tokens, 1000);
         Mockito.verify(roundTimer, Mockito.times(1)).start();
     }
 }

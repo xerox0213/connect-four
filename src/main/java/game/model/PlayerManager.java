@@ -52,12 +52,14 @@ public class PlayerManager {
         players.forEach(Player::notifyDraw);
     }
 
-    public void notifyPlayersInitialGameState(Token[][] tokens) {
+    public void notifyPlayersInitialGameState(Token[][] tokens, long roundTime) {
         List<PlayerDto> playerDtos = players.stream().map(Player::getPlayerDto).toList();
-        Token currPlayerToken = getCurrPlayerToken();
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
-            GameDto gameDto = new GameDto(playerDtos, tokens, currPlayerToken, i == indexCurrPlayer);
+            PlayerDto playerDto = playerDtos.get(i);
+            PlayerDto opponentPlayerDto = playerDtos.get(i == 0 ? 1 : 0);
+            boolean isYourTurn = i == indexCurrPlayer;
+            GameDto gameDto = new GameDto(playerDto, opponentPlayerDto, tokens, roundTime, isYourTurn);
             player.notifyInitialGameState(gameDto);
         }
     }

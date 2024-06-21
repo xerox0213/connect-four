@@ -36,7 +36,8 @@ public class LocalGame implements Game {
     @Override
     public void start() {
         Token[][] tokens = board.getCopyTokens();
-        playerManager.notifyPlayersInitialGameState(tokens);
+        long roundTime = roundTimer.getMillis();
+        playerManager.notifyPlayersInitialGameState(tokens, roundTime);
         roundTimer.start();
     }
 }

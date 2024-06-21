@@ -56,4 +56,8 @@ public class RoundTimer implements Observable {
     public void notifyObservers(ConnectFourEvent e, Object data) {
         observers.forEach(observer -> observer.update(e, data));
     }
+
+    public long getMillis() {
+        return time.getMillis();
+    }
 }
