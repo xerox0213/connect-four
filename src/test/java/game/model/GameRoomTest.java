@@ -26,12 +26,12 @@ class GameRoomTest {
     @BeforeEach
     void setUp() {
         Mockito.lenient()
-                .when(gameFactory.createGame(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any()))
+                .when(gameFactory.createGameAgainstComputer(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any()))
                 .thenReturn(gameAgainstComputer);
         BoardSize boardSize = BoardSize.EIGHT_BY_SEVEN;
         PlayerTime playerTime = PlayerTime.ONE_MINUTE;
         RoundTime roundTime = RoundTime.TEN_SECONDS;
-        FirstPlayer firstPlayer = FirstPlayer.ME;
+        FirstPlayer firstPlayer = FirstPlayer.HOST;
         gameConfigDto = new GameConfigDto(boardSize, playerTime, roundTime, firstPlayer);
         gameRoom = new GameRoom(gameFactory);
         playerName = "Link";
@@ -41,7 +41,7 @@ class GameRoomTest {
     void testPlayAgainstComputerShouldReturnGameAgainstComputer() {
         gameRoom.setMyPlayerName(playerName);
         Game result = gameRoom.playAgainstComputer(gameConfigDto, observer);
-        Mockito.verify(gameFactory, Mockito.times(1)).createGame(gameConfigDto, playerName, "Bip Boop", observer, null);
+        Mockito.verify(gameFactory, Mockito.times(1)).createGameAgainstComputer(gameConfigDto, playerName, observer, "Bip Boop");
         assertEquals(gameAgainstComputer, result);
     }
 }

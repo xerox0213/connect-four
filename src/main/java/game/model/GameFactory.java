@@ -9,11 +9,25 @@ import java.util.concurrent.ScheduledExecutorService;
 
 public class GameFactory {
 
-    public Game createGame(GameConfigDto gameConfigDto, String myPlayerName, String opponentName, Observer meObserver, Observer opponentObserver) {
-        Board board = createBoard(gameConfigDto.boardSize(), meObserver, opponentObserver);
-        List<Player> players = createPlayers(gameConfigDto.playerTime(), myPlayerName, opponentName, meObserver, opponentObserver);
+    public Game createGameAgainstComputer(GameConfigDto gameConfigDto, String hostPlayerName, Observer hostObserver, String computerName) {
+        Board board = createBoard(gameConfigDto.boardSize(), hostObserver);
+        Player hostPlayer = createPlayer(hostPlayerName, gameConfigDto.playerTime(), hostObserver);
+        AIPlayer aiPlayer = createAIPlayer(computerName, gameConfigDto.playerTime(), board);
+        List<Player> players = new ArrayList<>(List.of(hostPlayer, aiPlayer));
         PlayerManager playerManager = createPlayerManager(players, gameConfigDto.firstPlayer());
-        RoundTimer roundTimer = createRoundTimer(gameConfigDto.roundTime(), playerManager, meObserver, opponentObserver);
+        RoundTimer roundTimer = createRoundTimer(gameConfigDto.roundTime(), playerManager, hostObserver);
+        LocalGame localGame = new LocalGame(board, playerManager, roundTimer);
+        aiPlayer.setLocalGame(localGame);
+        return localGame;
+    }
+
+    public Game createGameAgainstFriend(GameConfigDto gameConfigDto, String hostPlayerName, Observer hostObserver, String opponentName, Observer opponentObserver) {
+        Board board = createBoard(gameConfigDto.boardSize(), hostObserver, opponentObserver);
+        Player hostPlayer = createPlayer(hostPlayerName, gameConfigDto.playerTime(), hostObserver);
+        Player opponentPlayer = createPlayer(opponentName, gameConfigDto.playerTime(), opponentObserver);
+        List<Player> players = new ArrayList<>(List.of(hostPlayer, opponentPlayer));
+        PlayerManager playerManager = createPlayerManager(players, gameConfigDto.firstPlayer());
+        RoundTimer roundTimer = createRoundTimer(gameConfigDto.roundTime(), playerManager, hostObserver, opponentObserver);
         return new LocalGame(board, playerManager, roundTimer);
     }
 
@@ -25,20 +39,21 @@ public class GameFactory {
         return new Board(tokens, observerSet);
     }
 
-    private List<Player> createPlayers(PlayerTime playerTime, String myPlayerName, String opponentName, Observer meObserver, Observer opponentObserver) {
-        Player mePlayer = createPlayer(myPlayerName, playerTime, meObserver);
-        Player opponentPlayer = createPlayer(opponentName, playerTime, opponentObserver);
-        return new ArrayList<>(List.of(mePlayer, opponentPlayer));
-    }
-
     private Player createPlayer(String playerName, PlayerTime playerTime, Observer observer) {
         Time time = new Time(playerTime.getMillis());
         Set<Observer> observers = observer != null ? new HashSet<>(Set.of(observer)) : new HashSet<>();
         return new Player(playerName, Token.RED, time, observers);
     }
 
+    private AIPlayer createAIPlayer(String playerName, PlayerTime playerTime, BoardView boardView) {
+        Time time = new Time(playerTime.getMillis());
+        Set<Observer> observers = new HashSet<>();
+        AIStrategy aiStrategy = new SimpleStrategy();
+        return new AIPlayer(playerName, Token.RED, time, observers, aiStrategy, boardView);
+    }
+
     private PlayerManager createPlayerManager(List<Player> players, FirstPlayer firstPlayer) {
-        if (firstPlayer == FirstPlayer.ME) {
+        if (firstPlayer == FirstPlayer.HOST) {
             int indexCurrPlayer = 0;
             return new PlayerManager(players, indexCurrPlayer);
         } else if (firstPlayer == FirstPlayer.OPPONENT) {

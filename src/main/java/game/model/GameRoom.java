@@ -16,6 +16,6 @@ public class GameRoom {
     }
 
     public Game playAgainstComputer(GameConfigDto gameConfigDto, Observer presenterObserver) {
-        return gameFactory.createGame(gameConfigDto, playerName, "Bip Boop", presenterObserver, null);
+        return gameFactory.createGameAgainstComputer(gameConfigDto, playerName, presenterObserver, "Bip Boop");
     }
 }
