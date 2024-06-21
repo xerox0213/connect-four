@@ -13,7 +13,7 @@ public interface ConnectFourView {
 
     void showError(String error);
 
-    void updateBoard(Token[][] tokens);
+    void updateBoard(Token token, int columnIndex, int rowIndex);
 
     void updateRoundTime();
 
