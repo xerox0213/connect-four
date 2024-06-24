@@ -48,6 +48,7 @@ public class JfxGameCtrl extends Showable {
 
     public void updateBoard(Token token, int columnIndex, int rowIndex) {
         Node node = getCircleAtCell(columnIndex, rowIndex);
+        node.getStyleClass().remove("circle-white");
         String circleClass = token == Token.RED ? "circle-red" : "circle-blue";
         node.getStyleClass().setAll(circleClass);
     }
