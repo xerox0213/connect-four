@@ -1,5 +1,6 @@
 package game.view;
 
+import game.dto.GameDto;
 import game.model.Token;
 
 public interface ConnectFourView {
@@ -7,7 +8,7 @@ public interface ConnectFourView {
 
     void showConfigurator();
 
-    void showGame();
+    void showGame(GameDto gameDto);
 
     void showEnd();
 
@@ -15,9 +16,9 @@ public interface ConnectFourView {
 
     void updateBoard(Token token, int columnIndex, int rowIndex);
 
-    void updateRoundTime();
+    void updateRoundTime(long millis);
 
-    void updatePlayerTime(boolean isMine);
+    void updatePlayerTime(long millis, boolean isMine);
 
     void updatePlayerTurn(boolean isMyTurn);
 }
