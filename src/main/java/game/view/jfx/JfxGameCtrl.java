@@ -55,7 +55,7 @@ public class JfxGameCtrl extends Showable {
 
     public void updateRoundTime(long millis) {
         long seconds = millisToSeconds(millis);
-        Platform.runLater(() -> roundTimeLabel.setText(String.valueOf(seconds)));
+        Platform.runLater(() -> roundTimeLabel.setText(formatTime(seconds)));
     }
 
     public void updatePlayerTime(long millis, boolean isMine) {
