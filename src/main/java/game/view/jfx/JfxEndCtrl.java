@@ -19,6 +19,11 @@ public class JfxEndCtrl extends Showable {
         this.connectFourPresenter = connectFourPresenter;
     }
 
+    @FXML
+    public void handleStartNewGame() {
+        connectFourPresenter.showMenu();
+    }
+
     public void init(boolean isWon) {
         if (isWon) resultLabel.setText("Victory");
         else resultLabel.setText("Game Over");
