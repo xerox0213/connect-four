@@ -25,8 +25,8 @@ public class LocalGame implements Game {
             } else if (isBoardFull) {
                 playerManager.declareGameDraw();
             } else {
-                playerManager.nextPlayer();
                 roundTimer.start();
+                playerManager.nextPlayer();
             }
         } catch (ConnectFourException e) {
             roundTimer.start();
