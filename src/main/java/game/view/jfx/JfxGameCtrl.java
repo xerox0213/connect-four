@@ -83,7 +83,7 @@ public class JfxGameCtrl extends Showable {
         long[] minutesAndSeconds = millisToMinutesAndSeconds(millis);
         long minutes = minutesAndSeconds[0];
         long seconds = minutesAndSeconds[1];
-        String time = minutes + ":" + seconds;
+        String time = formatTime(minutes) + ":" + formatTime(seconds);
         Platform.runLater(() -> playerTimeLabel.setText(time));
     }
 
@@ -156,5 +156,9 @@ public class JfxGameCtrl extends Showable {
         long minutes = secondsToMinutes(totalSeconds);
         long seconds = totalSeconds % 60;
         return new long[]{minutes, seconds};
+    }
+
+    private String formatTime(long time) {
+        return time <= 9 ? "0" + time : String.valueOf(time);
     }
 }
