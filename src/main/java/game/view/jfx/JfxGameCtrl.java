@@ -112,6 +112,7 @@ public class JfxGameCtrl extends Showable {
                 Circle circle = new Circle(15);
                 circle.addEventHandler(MouseEvent.MOUSE_CLICKED, this::handlePlayToken);
                 circle.addEventFilter(MouseEvent.MOUSE_CLICKED, this::filterHandlerPlayToken);
+                circle.getStyleClass().add("circle-white");
                 grid.add(circle, colIndex, rowIndex, 1, 1);
             }
         }
