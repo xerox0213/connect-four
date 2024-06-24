@@ -18,8 +18,16 @@ public class AIPlayer extends Player {
     @Override
     public void play() {
         super.play();
-        int columnIndex = aiStrategy.getBestMove(boardView.getCopyTokens(), getToken());
-        localGame.play(columnIndex);
+        Runnable runnable = () -> {
+            try {
+                Thread.sleep(1200);
+            } catch (Exception ignore) {
+            }
+            int columnIndex = aiStrategy.getBestMove(boardView.getCopyTokens(), getToken());
+            localGame.play(columnIndex);
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();
     }
 
     public void setLocalGame(LocalGame localGame) {
