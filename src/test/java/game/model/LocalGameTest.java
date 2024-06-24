@@ -89,7 +89,7 @@ class LocalGameTest {
         LocalGame localGame = new LocalGame(board, playerManager, roundTimer);
         localGame.start();
         Mockito.verify(board, Mockito.times(1)).getCopyTokens();
-        Mockito.verify(playerManager, Mockito.times(1)).notifyPlayersInitialGameState(tokens, 1000);
+        Mockito.verify(playerManager, Mockito.times(1)).notifyGameStart(tokens, 1000);
         Mockito.verify(roundTimer, Mockito.times(1)).start();
     }
 }

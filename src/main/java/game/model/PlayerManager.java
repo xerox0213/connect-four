@@ -15,13 +15,14 @@ public class PlayerManager {
         this.indexCurrPlayer = indexCurrPlayer;
     }
 
+    public void notifyGameStart(Token[][] tokens, long roundTime) {
+        notifyPlayersInitialGameState(tokens, roundTime);
+        notifyCurrPlayerTurn();
+    }
+
     public void nextPlayer() {
         indexCurrPlayer = computeNextPlayerIndex();
-        Player currPlayer = players.get(indexCurrPlayer);
-        Player nextPlayer = players.get(computeNextPlayerIndex());
-        Token opponentToken = currPlayer.getToken();
-        nextPlayer.notifyOpponentTurn(opponentToken);
-        currPlayer.play();
+        notifyCurrPlayerTurn();
     }
 
     public Token getCurrPlayerToken() {
@@ -52,7 +53,7 @@ public class PlayerManager {
         players.forEach(Player::notifyDraw);
     }
 
-    public void notifyPlayersInitialGameState(Token[][] tokens, long roundTime) {
+    private void notifyPlayersInitialGameState(Token[][] tokens, long roundTime) {
         List<PlayerDto> playerDtos = players.stream().map(Player::getPlayerDto).toList();
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
@@ -62,6 +63,14 @@ public class PlayerManager {
             GameDto gameDto = new GameDto(playerDto, opponentPlayerDto, tokens, roundTime, isYourTurn);
             player.notifyInitialGameState(gameDto);
         }
+    }
+
+    private void notifyCurrPlayerTurn() {
+        Player currPlayer = players.get(indexCurrPlayer);
+        Player nextPlayer = players.get(computeNextPlayerIndex());
+        Token opponentToken = currPlayer.getToken();
+        nextPlayer.notifyOpponentTurn(opponentToken);
+        currPlayer.play();
     }
 
     private void declareWinner(int indexWinner, int indexLoser) {

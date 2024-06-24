@@ -124,17 +124,4 @@ class PlayerManagerTest {
         Mockito.verify(link, Mockito.times(1)).isTimeLeft();
         assertTrue(hasCurrentPlayerTimeLeft);
     }
-
-    @Test
-    void testNotifyPlayersInitialGameStateShouldNotifyInitialGameState() {
-        Token[][] tokens = new Token[1][1];
-        List<Player> players = new ArrayList<>(List.of(link, zelda));
-        int indexCurrPlayer = 0;
-        PlayerManager playerManager = new PlayerManager(players, indexCurrPlayer);
-        playerManager.notifyPlayersInitialGameState(tokens, 1000);
-        GameDto linkGameDto = new GameDto(link.getPlayerDto(), zelda.getPlayerDto() ,tokens, 1000, true);
-        Mockito.verify(link, Mockito.times(1)).notifyInitialGameState(linkGameDto);
-        GameDto zeldaGameDto = new GameDto(zelda.getPlayerDto(), link.getPlayerDto(), tokens, 1000, false);
-        Mockito.verify(zelda, Mockito.times(1)).notifyInitialGameState(zeldaGameDto);
-    }
 }
