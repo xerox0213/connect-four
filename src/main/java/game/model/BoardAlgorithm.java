@@ -2,7 +2,7 @@ package game.model;
 
 public class BoardAlgorithm {
 
-    public static boolean isBoardFull(Token[][] tokens){
+    public static boolean isBoardFull(Token[][] tokens) {
         int colIndex = 0;
         while (colIndex < tokens.length) {
             if (getFreeRowIndex(tokens, colIndex) != -1) return false;
@@ -42,9 +42,9 @@ public class BoardAlgorithm {
                     if (token == playedToken) {
                         numberTokensAligned++;
                         if (numberTokensAligned >= 4) return true;
-                    }
-                    colIndex += dx;
-                    rowIndex += dy;
+                        colIndex += dx;
+                        rowIndex += dy;
+                    } else break;
                 }
             }
         }
