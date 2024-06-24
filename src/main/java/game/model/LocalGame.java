@@ -25,6 +25,7 @@ public class LocalGame implements Game {
             } else if (isBoardFull) {
                 playerManager.declareGameDraw();
             } else {
+                roundTimer.reset();
                 roundTimer.start();
                 playerManager.nextPlayer();
             }
