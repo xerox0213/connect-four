@@ -18,4 +18,9 @@ public class JfxEndCtrl extends Showable {
         super(showStrategy);
         this.connectFourPresenter = connectFourPresenter;
     }
+
+    public void init(boolean isWon) {
+        if (isWon) resultLabel.setText("Victory");
+        else resultLabel.setText("Game Over");
+    }
 }
