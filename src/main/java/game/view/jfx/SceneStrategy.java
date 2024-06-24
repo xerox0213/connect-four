@@ -12,6 +12,11 @@ public class SceneStrategy implements ShowStrategy {
         scene.setRoot(parent);
     }
 
+    @Override
+    public void close() {
+        scene.setRoot(null);
+    }
+
     public void setScene(Scene scene) {
         this.scene = scene;
     }

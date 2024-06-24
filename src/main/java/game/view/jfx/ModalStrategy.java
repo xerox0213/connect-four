@@ -14,6 +14,11 @@ public class ModalStrategy implements ShowStrategy {
         stage.show();
     }
 
+    @Override
+    public void close() {
+        stage.close();
+    }
+
     public void initModal(Parent parent) {
         stage = new Stage();
         stage.setScene(new Scene(parent, 400, 400));
