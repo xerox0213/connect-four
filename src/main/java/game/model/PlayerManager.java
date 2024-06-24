@@ -20,8 +20,8 @@ public class PlayerManager {
         Player currPlayer = players.get(indexCurrPlayer);
         Player nextPlayer = players.get(computeNextPlayerIndex());
         Token opponentToken = currPlayer.getToken();
-        currPlayer.play();
         nextPlayer.notifyOpponentTurn(opponentToken);
+        currPlayer.play();
     }
 
     public Token getCurrPlayerToken() {
