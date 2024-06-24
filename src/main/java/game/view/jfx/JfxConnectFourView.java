@@ -32,8 +32,7 @@ public class JfxConnectFourView implements ConnectFourView {
     }
 
     @Override
-    public void showEnd() {
-
+    public void showEnd(boolean isWon) {
     }
 
     @Override
