@@ -77,7 +77,7 @@ public class JfxGameCtrl extends Showable {
     }
 
     private void filterHandlerPlayToken(MouseEvent e) {
-        if (isMyTurn) e.consume();
+        if (!isMyTurn) e.consume();
     }
 
     private void updatePlayerTime(Label playerTimeLabel, long millis) {
