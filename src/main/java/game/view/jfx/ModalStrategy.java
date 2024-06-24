@@ -6,16 +6,17 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class ModalStrategy implements ShowStrategy {
-    private final Stage stage;
 
-    public ModalStrategy(Parent parent, Stage stage, double v, double v1) {
-        this.stage = stage;
-        stage.setScene(new Scene(parent, v, v1));
-        stage.initModality(Modality.APPLICATION_MODAL);
-    }
+    private Stage stage;
 
     @Override
     public void show() {
         stage.show();
+    }
+
+    public void initModal(Parent parent) {
+        stage = new Stage();
+        stage.setScene(new Scene(parent, 400, 400));
+        stage.initModality(Modality.APPLICATION_MODAL);
     }
 }
