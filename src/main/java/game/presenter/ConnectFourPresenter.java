@@ -13,12 +13,11 @@ import game.view.ConnectFourView;
 public class ConnectFourPresenter implements Observer {
     private final GameRoom gameRoom;
     private Game game;
-    private final ConnectFourView connectFourView;
+    private ConnectFourView connectFourView;
     private boolean isItAgainstComputer;
 
-    public ConnectFourPresenter(GameRoom gameRoom, ConnectFourView connectFourView) {
+    public ConnectFourPresenter(GameRoom gameRoom) {
         this.gameRoom = gameRoom;
-        this.connectFourView = connectFourView;
     }
 
     public void setPlayerName(String playerName) {
@@ -43,6 +42,10 @@ public class ConnectFourPresenter implements Observer {
 
     public void play(int columnIndex) {
         game.play(columnIndex);
+    }
+
+    public void setConnectFourView(ConnectFourView connectFourView) {
+        this.connectFourView = connectFourView;
     }
 
     @Override
