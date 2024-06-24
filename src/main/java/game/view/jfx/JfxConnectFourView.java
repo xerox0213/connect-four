@@ -8,11 +8,13 @@ public class JfxConnectFourView implements ConnectFourView {
     private final JfxMenuCtrl jfxMenuCtrl;
     private final JfxConfigCtrl jfxConfigCtrl;
     private final JfxGameCtrl jfxGameCtrl;
+    private final JfxEndCtrl jfxEndCtrl;
 
-    public JfxConnectFourView(JfxMenuCtrl JfxMenuCtrl, JfxConfigCtrl jfxConfigCtrl, JfxGameCtrl jfxGameCtrl) {
+    public JfxConnectFourView(JfxMenuCtrl JfxMenuCtrl, JfxConfigCtrl jfxConfigCtrl, JfxGameCtrl jfxGameCtrl, JfxEndCtrl jfxEndCtrl) {
         this.jfxMenuCtrl = JfxMenuCtrl;
         this.jfxConfigCtrl = jfxConfigCtrl;
         this.jfxGameCtrl = jfxGameCtrl;
+        this.jfxEndCtrl = jfxEndCtrl;
     }
 
     @Override
@@ -33,6 +35,8 @@ public class JfxConnectFourView implements ConnectFourView {
 
     @Override
     public void showEnd(boolean isWon) {
+        jfxEndCtrl.init(isWon);
+        jfxEndCtrl.show();
     }
 
     @Override
