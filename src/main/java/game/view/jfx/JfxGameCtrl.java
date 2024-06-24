@@ -27,7 +27,7 @@ public class JfxGameCtrl extends Showable {
     @FXML
     private Label opponentTimeLabel;
     @FXML
-    private GridPane gridPane;
+    private GridPane grid;
 
     public JfxGameCtrl(ShowStrategy showStrategy, ConnectFourPresenter connectFourPresenter) {
         super(showStrategy);
@@ -92,19 +92,19 @@ public class JfxGameCtrl extends Showable {
     }
 
     private void initBoard(Token[][] tokens) {
-        gridPane.getChildren().clear();
+        grid.getChildren().clear();
 
         int cols = tokens.length;
         int rows = tokens[0].length;
 
         for (int colIndex = 0; colIndex < cols; colIndex++) {
             ColumnConstraints colConst = new ColumnConstraints(60);
-            gridPane.getColumnConstraints().add(colConst);
+            grid.getColumnConstraints().add(colConst);
         }
 
         for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
             RowConstraints rowConst = new RowConstraints(60);
-            gridPane.getRowConstraints().add(rowConst);
+            grid.getRowConstraints().add(rowConst);
         }
 
         for (int colIndex = 0; colIndex < cols; colIndex++) {
@@ -112,14 +112,14 @@ public class JfxGameCtrl extends Showable {
                 Circle circle = new Circle(15);
                 circle.addEventHandler(MouseEvent.MOUSE_CLICKED, this::handlePlayToken);
                 circle.addEventFilter(MouseEvent.MOUSE_CLICKED, this::filterHandlerPlayToken);
-                gridPane.add(circle, colIndex, rowIndex, 1, 1);
+                grid.add(circle, colIndex, rowIndex, 1, 1);
             }
         }
     }
 
     private Node getCircleAtCell(int columnIndex, int rowIndex) {
         Node result = null;
-        for (Node node : gridPane.getChildren()) {
+        for (Node node : grid.getChildren()) {
             if (GridPane.getRowIndex(node) == rowIndex && GridPane.getColumnIndex(node) == columnIndex) {
                 result = node;
                 break;
