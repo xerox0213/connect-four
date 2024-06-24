@@ -37,6 +37,7 @@ public class ConnectFourPresenter implements Observer {
     public void createGame(GameConfigDto gameConfigDto) {
         if (isItAgainstComputer) {
             game = gameRoom.playAgainstComputer(gameConfigDto, this);
+            game.start();
         }
     }
 
