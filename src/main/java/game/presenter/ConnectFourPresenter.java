@@ -25,7 +25,7 @@ public class ConnectFourPresenter implements Observer {
             connectFourView.showError("Enter a valid player name !");
         } else {
             gameRoom.setMyPlayerName(playerName);
-            connectFourView.showMenu();
+            showMenu();
         }
     }
 
@@ -47,6 +47,10 @@ public class ConnectFourPresenter implements Observer {
 
     public void setConnectFourView(ConnectFourView connectFourView) {
         this.connectFourView = connectFourView;
+    }
+
+    public void showMenu() {
+        connectFourView.showMenu();
     }
 
     @Override
