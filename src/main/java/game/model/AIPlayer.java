@@ -27,6 +27,7 @@ public class AIPlayer extends Player {
             localGame.play(columnIndex);
         };
         Thread thread = new Thread(runnable);
+        thread.setDaemon(true);
         thread.start();
     }
 
