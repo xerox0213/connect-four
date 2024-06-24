@@ -20,11 +20,6 @@
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button fx:id="quitBtn" mnemonicParsing="false" text="Quitter ">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Button>
          </children>
       </HBox>
    </children>

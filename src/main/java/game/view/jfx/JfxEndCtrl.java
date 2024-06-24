@@ -11,8 +11,6 @@ public class JfxEndCtrl extends Showable {
     private Label resultLabel;
     @FXML
     private Button newGameBtn;
-    @FXML
-    private Button quitBtn;
 
     public JfxEndCtrl(ShowStrategy showStrategy, ConnectFourPresenter connectFourPresenter) {
         super(showStrategy);
