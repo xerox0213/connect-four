@@ -135,13 +135,13 @@ public class JfxGameCtrl extends Showable {
         return millis / 1000;
     }
 
-    private long millisToMinutes(long millis) {
+    private long secondsToMinutes(long millis) {
         return millis / 60;
     }
 
     private long[] millisToMinutesAndSeconds(long millis) {
         long totalSeconds = millisToSeconds(millis);
-        long minutes = millisToMinutes(millis);
+        long minutes = secondsToMinutes(totalSeconds);
         long seconds = totalSeconds % 60;
         return new long[]{minutes, seconds};
     }
