@@ -38,6 +38,10 @@ public class ConnectFourPresenter implements Observer {
         }
     }
 
+    public void play(int columnIndex) {
+        game.play(columnIndex);
+    }
+
     @Override
     public void update(ConnectFourEvent e, Object data) {
 
