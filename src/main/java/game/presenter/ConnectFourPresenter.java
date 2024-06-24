@@ -70,6 +70,10 @@ public class ConnectFourPresenter implements Observer {
         } else if (e == ConnectFourEvent.BOARD_UPDATED) {
             MoveDto moveDto = (MoveDto) data;
             connectFourView.updateBoard(moveDto.token(), moveDto.columnIndex(), moveDto.rowIndex());
+        } else if (e == ConnectFourEvent.VICTORY) {
+            connectFourView.showEnd(true);
+        } else if (e == ConnectFourEvent.GAME_OVER) {
+            connectFourView.showEnd(false);
         }
     }
 }
