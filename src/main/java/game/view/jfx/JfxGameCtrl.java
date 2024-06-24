@@ -6,12 +6,12 @@ import game.model.Token;
 import game.presenter.ConnectFourPresenter;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 
 public class JfxGameCtrl extends Showable {
@@ -95,27 +95,40 @@ public class JfxGameCtrl extends Showable {
 
     private void initBoard(Token[][] tokens) {
         grid.getChildren().clear();
+        grid.getColumnConstraints().clear();
+        grid.getRowConstraints().clear();
+        grid.setHgap(12);
+        grid.setVgap(12);
+        grid.setStyle("-fx-background-color: #CED4DA");
 
         int cols = tokens.length;
         int rows = tokens[0].length;
 
         for (int colIndex = 0; colIndex < cols; colIndex++) {
-            ColumnConstraints colConst = new ColumnConstraints(60);
+            ColumnConstraints colConst = new ColumnConstraints();
+            colConst.setMinWidth(60);
+            colConst.setPrefWidth(60);
+            colConst.setMaxWidth(60);
+            colConst.setHalignment(HPos.CENTER);
             grid.getColumnConstraints().add(colConst);
         }
 
         for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
-            RowConstraints rowConst = new RowConstraints(60);
+            RowConstraints rowConst = new RowConstraints();
+            rowConst.setMinHeight(60);
+            rowConst.setPrefHeight(60);
+            rowConst.setMaxHeight(60);
+            rowConst.setValignment(VPos.CENTER);
             grid.getRowConstraints().add(rowConst);
         }
 
         for (int colIndex = 0; colIndex < cols; colIndex++) {
             for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
-                Circle circle = new Circle(15);
+                Circle circle = new Circle(18);
                 circle.addEventHandler(MouseEvent.MOUSE_CLICKED, this::handlePlayToken);
                 circle.addEventFilter(MouseEvent.MOUSE_CLICKED, this::filterHandlerPlayToken);
                 circle.getStyleClass().add("circle-white");
-                grid.add(circle, colIndex, rowIndex, 1, 1);
+                grid.add(circle, colIndex, rowIndex);
             }
         }
     }
