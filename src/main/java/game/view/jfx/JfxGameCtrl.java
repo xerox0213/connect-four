@@ -4,6 +4,7 @@ import game.dto.GameDto;
 import game.dto.PlayerDto;
 import game.model.Token;
 import game.presenter.ConnectFourPresenter;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -55,7 +56,7 @@ public class JfxGameCtrl extends Showable {
 
     public void updateRoundTime(long millis) {
         long seconds = millisToSeconds(millis);
-        roundTimeLabel.setText(String.valueOf(seconds));
+        Platform.runLater(() -> roundTimeLabel.setText(String.valueOf(seconds)));
     }
 
     public void updatePlayerTime(long millis, boolean isMine) {
@@ -84,7 +85,7 @@ public class JfxGameCtrl extends Showable {
         long minutes = minutesAndSeconds[0];
         long seconds = minutesAndSeconds[1];
         String time = minutes + ":" + seconds;
-        playerTimeLabel.setText(time);
+        Platform.runLater(() -> playerTimeLabel.setText(time));
     }
 
     private void updatePlayerTurn(Label toActivate, Label toDeactivate) {
