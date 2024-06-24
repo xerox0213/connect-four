@@ -41,4 +41,9 @@ public class LocalGame implements Game {
         playerManager.notifyGameStart(tokens, roundTime);
         roundTimer.start();
     }
+
+    @Override
+    public void stop() {
+        roundTimer.stop();
+    }
 }
