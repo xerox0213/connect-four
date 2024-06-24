@@ -6,24 +6,25 @@ import game.oo.Observable;
 import game.oo.Observer;
 
 import java.util.Set;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class RoundTimer implements Observable {
     private final Time time;
     private final PlayerManager playerManager;
-    private final ScheduledExecutorService scheduler;
+    private ScheduledExecutorService scheduler;
     private final Set<Observer> observers;
 
-    public RoundTimer(Time time, PlayerManager playerManager, ScheduledExecutorService scheduler, Set<Observer> observers) {
+    public RoundTimer(Time time, PlayerManager playerManager, Set<Observer> observers) {
         this.time = time;
         this.playerManager = playerManager;
-        this.scheduler = scheduler;
         this.observers = observers;
     }
 
     public void start() {
         Runnable runnable = this::reduceCurrPlayerTime;
+        scheduler = Executors.newSingleThreadScheduledExecutor();
         scheduler.scheduleAtFixedRate(runnable, 1000, 1000, TimeUnit.MILLISECONDS);
     }
 
