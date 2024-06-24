@@ -10,4 +10,8 @@ public abstract class Showable {
     public void show() {
         showStrategy.show();
     }
+
+    public void close() {
+        showStrategy.close();
+    }
 }
