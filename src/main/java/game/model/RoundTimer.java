@@ -60,4 +60,9 @@ public class RoundTimer implements Observable {
     public long getMillis() {
         return time.getMillis();
     }
+
+    public void reset() {
+        time.reset();
+        notifyObservers(ConnectFourEvent.ROUND_TIME_UPDATED, time.getMillis());
+    }
 }
