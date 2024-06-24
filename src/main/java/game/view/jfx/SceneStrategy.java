@@ -4,12 +4,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 public class SceneStrategy implements ShowStrategy {
-    private final Parent parent;
+    private Parent parent;
     private Scene scene;
-
-    public SceneStrategy(Parent parent) {
-        this.parent = parent;
-    }
 
     @Override
     public void show() {
@@ -18,5 +14,9 @@ public class SceneStrategy implements ShowStrategy {
 
     public void setScene(Scene scene) {
         this.scene = scene;
+    }
+
+    public void setParent(Parent parent) {
+        this.parent = parent;
     }
 }
