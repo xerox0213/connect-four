@@ -1,6 +1,9 @@
 package game.presenter;
 
 import game.dto.GameConfigDto;
+import game.dto.GameDto;
+import game.dto.MoveDto;
+import game.dto.PlayerDto;
 import game.model.Game;
 import game.model.GameRoom;
 import game.oo.ConnectFourEvent;
@@ -44,6 +47,25 @@ public class ConnectFourPresenter implements Observer {
 
     @Override
     public void update(ConnectFourEvent e, Object data) {
-
+        if (e == ConnectFourEvent.GAME_INIT) {
+            GameDto gameDto = (GameDto) data;
+            connectFourView.showGame(gameDto);
+        } else if (e == ConnectFourEvent.MY_TURN) {
+            connectFourView.updatePlayerTurn(true);
+        } else if (e == ConnectFourEvent.OPPONENT_TURN) {
+            connectFourView.updatePlayerTurn(false);
+        } else if (e == ConnectFourEvent.ROUND_TIME_UPDATED) {
+            long millis = (long) data;
+            connectFourView.updateRoundTime(millis);
+        } else if (e == ConnectFourEvent.PLAYER_TIME_UPDATED) {
+            PlayerDto playerDto = (PlayerDto) data;
+            connectFourView.updatePlayerTime(playerDto.time(), true);
+        } else if (e == ConnectFourEvent.OPPONENT_TIME_UPDATED) {
+            PlayerDto opponentPlayerDto = (PlayerDto) data;
+            connectFourView.updatePlayerTime(opponentPlayerDto.time(), false);
+        } else if (e == ConnectFourEvent.BOARD_UPDATED) {
+            MoveDto moveDto = (MoveDto) data;
+            connectFourView.updateBoard(moveDto.token(), moveDto.columnIndex(), moveDto.rowIndex());
+        }
     }
 }
