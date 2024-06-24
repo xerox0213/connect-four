@@ -6,6 +6,10 @@
     -fx-fill: blue;
 }
 
+.circle-white {
+    -fx-fill: white;
+}
+
 .active-time {
     -fx-background-color: #18BC9C;
     -fx-text-fill: white;
