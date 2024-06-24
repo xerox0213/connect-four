@@ -53,6 +53,10 @@ public class ConnectFourPresenter implements Observer {
         connectFourView.showMenu();
     }
 
+    public void quitGame() {
+        stopGame();
+    }
+
     @Override
     public void update(ConnectFourEvent e, Object data) {
         if (e == ConnectFourEvent.GAME_INIT) {
@@ -79,5 +83,9 @@ public class ConnectFourPresenter implements Observer {
         } else if (e == ConnectFourEvent.GAME_OVER) {
             connectFourView.showEnd(false);
         }
+    }
+
+    private void stopGame() {
+        if (game != null) game.stop();
     }
 }
