@@ -59,8 +59,7 @@ public class PlayerManager {
             Player player = players.get(i);
             PlayerDto playerDto = playerDtos.get(i);
             PlayerDto opponentPlayerDto = playerDtos.get(i == 0 ? 1 : 0);
-            boolean isYourTurn = i == indexCurrPlayer;
-            GameDto gameDto = new GameDto(playerDto, opponentPlayerDto, tokens, roundTime, isYourTurn);
+            GameDto gameDto = new GameDto(playerDto, opponentPlayerDto, tokens, roundTime);
             player.notifyInitialGameState(gameDto);
         }
     }

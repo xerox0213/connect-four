@@ -148,7 +148,7 @@ class PlayerTest {
     void testNotifyInitialGameStateShouldNotifyObservers() {
         Set<Observer> observers = new HashSet<>(Set.of(observer));
         Player player = new Player("test", Token.RED, time, observers);
-        GameDto gameDto = new GameDto(null, null, null, 1000, false);
+        GameDto gameDto = new GameDto(null, null, null, 1000);
         ConnectFourEvent event = ConnectFourEvent.GAME_INIT;
         player.notifyInitialGameState(gameDto);
         Mockito.verify(observer, Mockito.times(1)).update(event, gameDto);
