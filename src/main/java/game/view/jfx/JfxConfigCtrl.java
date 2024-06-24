@@ -49,6 +49,7 @@ public class JfxConfigCtrl extends Showable implements Initializable {
         minutesPerPlayerComboBox.setValue(PlayerTime.values()[0]);
         firstPlayerComboBox.setValue(FirstPlayer.values()[0]);
         connectFourPresenter.createGame(gameConfigDto);
+        close();
     }
 
     private void initBoardSizeComboBox() {
