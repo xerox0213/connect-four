@@ -42,6 +42,8 @@ public class JfxGameCtrl extends Showable {
         updatePlayerTime(playerTimeLabel, playerDto.time());
         opponentNameLabel.setText(opponentPlayerDto.name());
         updatePlayerTime(opponentTimeLabel, opponentPlayerDto.time());
+        playerTimeLabel.getStyleClass().remove("active-time");
+        opponentTimeLabel.getStyleClass().remove("active-time");
         updateRoundTime(gameDto.roundTime());
         initBoard(gameDto.tokens());
     }
