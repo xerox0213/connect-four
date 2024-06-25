@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
@@ -20,12 +21,16 @@
       </ImageView>
       <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <TextField fx:id="playerNameLabel" alignment="TOP_CENTER" maxWidth="-Infinity" promptText="Enter your name">
+            <TextField fx:id="playerNameLabel" alignment="TOP_CENTER" maxWidth="-Infinity" promptText="Enter your name" styleClass="input">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
             </TextField>
-            <Button fx:id="confirmPlayerNameBtn" mnemonicParsing="false" onAction="#handleConfirmPlayerName" text="Confirm" />
+            <Button fx:id="confirmPlayerNameBtn" mnemonicParsing="false" onAction="#handleConfirmPlayerName" text="Confirm">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="btn-green" />
+               </styleClass></Button>
          </children>
       </HBox>
    </children>

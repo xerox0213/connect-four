@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
@@ -24,11 +25,19 @@
          <VBox.margin>
             <Insets bottom="10.0" />
          </VBox.margin>
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-transparent" />
+         </styleClass>
       </Button>
       <Button mnemonicParsing="false" text="Play with a friend">
          <font>
             <Font size="17.0" />
          </font>
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-transparent" />
+         </styleClass>
       </Button>
    </children>
 </VBox>

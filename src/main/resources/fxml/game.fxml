@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -163,10 +164,14 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="interruptBtn" mnemonicParsing="false" onAction="#handleInterruptGame" text="Interrupt the game" textFill="RED">
+            <Button fx:id="interruptBtn" mnemonicParsing="false" onAction="#handleInterruptGame" text="Interrupt the game">
                <font>
                   <Font size="18.0" />
                </font>
+               <styleClass>
+                  <String fx:value="btn-red" />
+                  <String fx:value="btn" />
+               </styleClass>
             </Button>
          </children></HBox>
    </bottom>

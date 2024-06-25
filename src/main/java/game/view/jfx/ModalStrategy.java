@@ -21,7 +21,9 @@ public class ModalStrategy implements ShowStrategy {
 
     public void initModal(Parent parent) {
         stage = new Stage();
-        stage.setScene(new Scene(parent, 400, 400));
+        Scene scene = new Scene(parent, 400, 400);
+        scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
+        stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
     }
 }
