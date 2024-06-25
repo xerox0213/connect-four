@@ -79,9 +79,9 @@ public class ConnectFourPresenter implements Observer {
             MoveDto moveDto = (MoveDto) data;
             connectFourView.updateBoard(moveDto.token(), moveDto.columnIndex(), moveDto.rowIndex());
         } else if (e == ConnectFourEvent.VICTORY) {
-            connectFourView.showEnd(true);
+            connectFourView.showVictory();
         } else if (e == ConnectFourEvent.GAME_OVER) {
-            connectFourView.showEnd(false);
+            connectFourView.showGameOver();
         }
     }
 

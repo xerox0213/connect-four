@@ -34,9 +34,13 @@ public class JfxConnectFourView implements ConnectFourView {
     }
 
     @Override
-    public void showEnd(boolean isWon) {
-        jfxEndCtrl.init(isWon);
-        jfxEndCtrl.show();
+    public void showVictory() {
+        jfxEndCtrl.showVictory();
+    }
+
+    @Override
+    public void showGameOver() {
+        jfxEndCtrl.showGameOver();
     }
 
     @Override

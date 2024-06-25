@@ -10,7 +10,9 @@ public interface ConnectFourView {
 
     void showGame(GameDto gameDto);
 
-    void showEnd(boolean isWon);
+    void showVictory();
+
+    void showGameOver();
 
     void showError(String error);
 
