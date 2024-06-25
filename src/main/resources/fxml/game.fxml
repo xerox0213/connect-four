@@ -153,7 +153,7 @@
             <Circle fill="WHITE" radius="13.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.rowIndex="5" />
          </children>
          <cursor>
-            <Cursor fx:constant="DEFAULT" />
+            <Cursor fx:constant="HAND" />
          </cursor>
          <BorderPane.margin>
             <Insets />

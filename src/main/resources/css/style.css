@@ -14,3 +14,7 @@
     -fx-background-color: #18BC9C;
     -fx-text-fill: white;
 }
+
+.cell-hover {
+    -fx-background-color: #CED4DA;
+}

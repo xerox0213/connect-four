@@ -7,6 +7,7 @@ import game.presenter.ConnectFourPresenter;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -14,6 +15,10 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 public class JfxGameCtrl extends Showable {
     private final ConnectFourPresenter connectFourPresenter;
@@ -52,10 +57,11 @@ public class JfxGameCtrl extends Showable {
     }
 
     public void updateBoard(Token token, int columnIndex, int rowIndex) {
-        Node node = getCircleAtCell(columnIndex, rowIndex);
-        node.getStyleClass().remove("circle-white");
+        HBox container = (HBox) getCircleAtCell(columnIndex, rowIndex);
+        Node circle = container.getChildren().getFirst();
+        circle.getStyleClass().remove("circle-white");
         String circleClass = token == Token.RED ? "circle-red" : "circle-blue";
-        node.getStyleClass().setAll(circleClass);
+        circle.getStyleClass().setAll(circleClass);
     }
 
     public void updateRoundTime(long millis) {
@@ -75,12 +81,13 @@ public class JfxGameCtrl extends Showable {
     }
 
     private void handlePlayToken(MouseEvent e) {
-        Node node = (Node) e.getSource();
-        Integer columnIndex = GridPane.getColumnIndex(node);
+        handleExitColumn(e);
+        HBox container = (HBox) e.getSource();
+        Integer columnIndex = GridPane.getColumnIndex(container);
         connectFourPresenter.play(columnIndex);
     }
 
-    private void filterHandlerPlayToken(MouseEvent e) {
+    private void filterPlayerTurn(MouseEvent e) {
         if (!isMyTurn) e.consume();
     }
 
@@ -106,9 +113,7 @@ public class JfxGameCtrl extends Showable {
         grid.getChildren().clear();
         grid.getColumnConstraints().clear();
         grid.getRowConstraints().clear();
-        grid.setHgap(12);
-        grid.setVgap(12);
-        grid.setStyle("-fx-background-color: #CED4DA");
+        grid.setStyle("-fx-background-color: #DEE2E6");
 
         int cols = tokens.length;
         int rows = tokens[0].length;
@@ -133,11 +138,18 @@ public class JfxGameCtrl extends Showable {
 
         for (int colIndex = 0; colIndex < cols; colIndex++) {
             for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
+                HBox container = new HBox();
+                container.setAlignment(Pos.CENTER);
+                container.addEventHandler(MouseEvent.MOUSE_CLICKED, this::handlePlayToken);
+                container.addEventFilter(MouseEvent.MOUSE_CLICKED, this::filterPlayerTurn);
+                container.addEventHandler(MouseEvent.MOUSE_ENTERED, this::handleEnterColumn);
+                container.addEventFilter(MouseEvent.MOUSE_ENTERED, this::filterPlayerTurn);
+                container.addEventHandler(MouseEvent.MOUSE_EXITED, this::handleExitColumn);
+                container.addEventFilter(MouseEvent.MOUSE_EXITED, this::filterPlayerTurn);
                 Circle circle = new Circle(18);
-                circle.addEventHandler(MouseEvent.MOUSE_CLICKED, this::handlePlayToken);
-                circle.addEventFilter(MouseEvent.MOUSE_CLICKED, this::filterHandlerPlayToken);
                 circle.getStyleClass().add("circle-white");
-                grid.add(circle, colIndex, rowIndex);
+                container.getChildren().add(circle);
+                grid.add(container, colIndex, rowIndex);
             }
         }
     }
@@ -170,5 +182,23 @@ public class JfxGameCtrl extends Showable {
 
     private String formatTime(long time) {
         return time <= 9 ? "0" + time : String.valueOf(time);
+    }
+
+    private void handleEnterColumn(MouseEvent e) {
+        Node node = (Node) e.getSource();
+        Integer columnIndex = GridPane.getColumnIndex(node);
+        List<Node> columnContainers = getColumnContainers(columnIndex);
+        columnContainers.forEach((n) -> n.getStyleClass().add("cell-hover"));
+    }
+
+    private void handleExitColumn(MouseEvent e) {
+        Node node = (Node) e.getSource();
+        Integer columnIndex = GridPane.getColumnIndex(node);
+        List<Node> columnContainers = getColumnContainers(columnIndex);
+        columnContainers.forEach((n) -> n.getStyleClass().remove("cell-hover"));
+    }
+
+    private List<Node> getColumnContainers(int columnIndex) {
+        return grid.getChildren().stream().filter(n -> Objects.equals(GridPane.getColumnIndex(n), columnIndex)).toList();
     }
 }
