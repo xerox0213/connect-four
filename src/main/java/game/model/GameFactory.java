@@ -33,7 +33,7 @@ public class GameFactory {
         int rows = boardSize.getRows();
         int cols = boardSize.getCols();
         Set<Observer> observerSet = new HashSet<>(Arrays.asList(observers));
-        Token[][] tokens = new Token[rows][cols];
+        Token[][] tokens = new Token[cols][rows];
         return new Board(tokens, observerSet);
     }
 
