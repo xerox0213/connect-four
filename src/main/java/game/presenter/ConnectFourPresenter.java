@@ -82,6 +82,8 @@ public class ConnectFourPresenter implements Observer {
             connectFourView.showVictory();
         } else if (e == ConnectFourEvent.GAME_OVER) {
             connectFourView.showGameOver();
+        } else if (e == ConnectFourEvent.GAME_DRAW) {
+            connectFourView.showDraw();
         }
     }
 

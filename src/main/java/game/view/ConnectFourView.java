@@ -14,6 +14,8 @@ public interface ConnectFourView {
 
     void showGameOver();
 
+    void showDraw();
+
     void showError(String error);
 
     void updateBoard(Token token, int columnIndex, int rowIndex);

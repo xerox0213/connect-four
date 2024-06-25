@@ -44,6 +44,11 @@ public class JfxConnectFourView implements ConnectFourView {
     }
 
     @Override
+    public void showDraw() {
+        jfxEndCtrl.showDraw();
+    }
+
+    @Override
     public void showError(String error) {
         System.out.println(error);
     }

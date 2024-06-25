@@ -31,4 +31,9 @@ public class JfxEndCtrl extends Showable {
         resultLabel.setText("Game Over");
         show();
     }
+
+    public void showDraw() {
+        resultLabel.setText("Draw");
+        show();
+    }
 }
