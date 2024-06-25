@@ -24,7 +24,7 @@ public class RoundTimer implements Observable {
 
     public void start() {
         Runnable runnable = this::reduceCurrPlayerTime;
-        scheduler = Executors.newSingleThreadScheduledExecutor();
+        scheduler = Executors.newSingleThreadScheduledExecutor(this::createDaemonThread);
         scheduler.scheduleAtFixedRate(runnable, 1000, 1000, TimeUnit.MILLISECONDS);
     }
 
@@ -46,6 +46,12 @@ public class RoundTimer implements Observable {
     private void declareNextPlayerWinner() {
         stop();
         playerManager.declareNextPlayerWinner();
+    }
+
+    private Thread createDaemonThread(Runnable runnable) {
+        Thread thread = new Thread(runnable);
+        thread.setDaemon(true);
+        return thread;
     }
 
     @Override
