@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -29,6 +30,8 @@ public class JfxGameCtrl extends Showable {
     private Label opponentTimeLabel;
     @FXML
     private GridPane grid;
+    @FXML
+    private Button interruptBtn;
 
     public JfxGameCtrl(ShowStrategy showStrategy, ConnectFourPresenter connectFourPresenter) {
         super(showStrategy);
@@ -79,6 +82,11 @@ public class JfxGameCtrl extends Showable {
 
     private void filterHandlerPlayToken(MouseEvent e) {
         if (!isMyTurn) e.consume();
+    }
+
+    @FXML
+    private void handleInterruptGame() {
+        connectFourPresenter.interruptGame();
     }
 
     private void updatePlayerTime(Label playerTimeLabel, long millis) {
