@@ -34,7 +34,6 @@ public class Main extends Application {
         connectFourPresenter.setConnectFourView(jfxConnectFourView);
 
         scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
-        stage.setOnCloseRequest((e) -> connectFourPresenter.quitGame());
         stage.setScene(scene);
         stage.show();
     }
