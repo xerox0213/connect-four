@@ -7,12 +7,14 @@ import game.view.ConnectFourView;
 public class JfxConnectFourView implements ConnectFourView {
     private final JfxMenuCtrl jfxMenuCtrl;
     private final JfxConfigCtrl jfxConfigCtrl;
+    private final JfxJoinCtrl jfxJoinCtrl;
     private final JfxGameCtrl jfxGameCtrl;
     private final JfxEndCtrl jfxEndCtrl;
 
-    public JfxConnectFourView(JfxMenuCtrl JfxMenuCtrl, JfxConfigCtrl jfxConfigCtrl, JfxGameCtrl jfxGameCtrl, JfxEndCtrl jfxEndCtrl) {
-        this.jfxMenuCtrl = JfxMenuCtrl;
+    public JfxConnectFourView(JfxMenuCtrl jfxMenuCtrl, JfxConfigCtrl jfxConfigCtrl, JfxJoinCtrl jfxJoinCtrl, JfxGameCtrl jfxGameCtrl, JfxEndCtrl jfxEndCtrl) {
+        this.jfxMenuCtrl = jfxMenuCtrl;
         this.jfxConfigCtrl = jfxConfigCtrl;
+        this.jfxJoinCtrl = jfxJoinCtrl;
         this.jfxGameCtrl = jfxGameCtrl;
         this.jfxEndCtrl = jfxEndCtrl;
     }
@@ -25,6 +27,11 @@ public class JfxConnectFourView implements ConnectFourView {
     @Override
     public void showConfigurator() {
         jfxConfigCtrl.show();
+    }
+
+    @Override
+    public void showJoin() {
+        jfxJoinCtrl.show();
     }
 
     @Override

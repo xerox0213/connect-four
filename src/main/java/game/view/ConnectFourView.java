@@ -8,6 +8,8 @@ public interface ConnectFourView {
 
     void showConfigurator();
 
+    void showJoin();
+
     void showGame(GameDto gameDto);
 
     void showVictory();
