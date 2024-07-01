@@ -10,6 +10,8 @@ public interface ConnectFourView {
 
     void showJoin();
 
+    void showWaitingForOpponent(String ip, String port);
+
     void showGame(GameDto gameDto);
 
     void showVictory();

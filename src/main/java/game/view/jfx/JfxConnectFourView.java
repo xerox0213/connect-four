@@ -10,13 +10,15 @@ public class JfxConnectFourView implements ConnectFourView {
     private final JfxJoinCtrl jfxJoinCtrl;
     private final JfxGameCtrl jfxGameCtrl;
     private final JfxEndCtrl jfxEndCtrl;
+    private final JfxWaitingCtrl jfxWaitingCtrl;
 
-    public JfxConnectFourView(JfxMenuCtrl jfxMenuCtrl, JfxConfigCtrl jfxConfigCtrl, JfxJoinCtrl jfxJoinCtrl, JfxGameCtrl jfxGameCtrl, JfxEndCtrl jfxEndCtrl) {
+    public JfxConnectFourView(JfxMenuCtrl jfxMenuCtrl, JfxConfigCtrl jfxConfigCtrl, JfxJoinCtrl jfxJoinCtrl, JfxGameCtrl jfxGameCtrl, JfxEndCtrl jfxEndCtrl, JfxWaitingCtrl jfxWaitingCtrl) {
         this.jfxMenuCtrl = jfxMenuCtrl;
         this.jfxConfigCtrl = jfxConfigCtrl;
         this.jfxJoinCtrl = jfxJoinCtrl;
         this.jfxGameCtrl = jfxGameCtrl;
         this.jfxEndCtrl = jfxEndCtrl;
+        this.jfxWaitingCtrl = jfxWaitingCtrl;
     }
 
     @Override
@@ -32,6 +34,12 @@ public class JfxConnectFourView implements ConnectFourView {
     @Override
     public void showJoin() {
         jfxJoinCtrl.show();
+    }
+
+    @Override
+    public void showWaitingForOpponent(String ip, String port) {
+        jfxWaitingCtrl.init(ip, port);
+        jfxWaitingCtrl.show();
     }
 
     @Override
