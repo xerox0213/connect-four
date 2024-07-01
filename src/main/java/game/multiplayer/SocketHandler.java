@@ -10,7 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class SocketHandler implements Runnable {
+public class SocketHandler implements Runnable, Observer {
     private final Socket socket;
     private final ObjectInputStream ois;
     private final ObjectOutputStream oos;
@@ -46,6 +46,18 @@ public class SocketHandler implements Runnable {
         try {
             oos.writeObject(socketMsgDto);
         } catch (IOException ioe) {
+            close();
+        }
+    }
+
+    @Override
+    public void update(ConnectFourEvent e, Object data) {
+        ConnectFourEventDto cfed = new ConnectFourEventDto(e, data);
+        SocketEvent socketEvent = SocketEvent.CONNECT_FOUR_EVENT;
+        SocketMsgDto<ConnectFourEventDto> socketMsgDto = new SocketMsgDto<>(socketEvent, cfed);
+        send(socketMsgDto);
+
+        if (e == ConnectFourEvent.VICTORY || e == ConnectFourEvent.GAME_OVER) {
             close();
         }
     }
