@@ -44,6 +44,10 @@ public class GameRoom implements Observable {
         return createPlayerSocket("localhost", 8080, RolePlayer.HOST, gameConfigDto, presenterObserver);
     }
 
+    public Game joinGame(String ip, int port, Observer presenterObserver) throws IOException {
+        return createPlayerSocket(ip, port, RolePlayer.GUEST, null, presenterObserver);
+    }
+
     private PlayerSocket createPlayerSocket(String ip, int port, RolePlayer rolePlayer, GameConfigDto gameConfigDto, Observer presenterObserver) throws IOException {
         Socket socket = new Socket(ip, port);
         ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
