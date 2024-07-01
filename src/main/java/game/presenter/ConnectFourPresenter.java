@@ -51,6 +51,18 @@ public class ConnectFourPresenter implements Observer {
         connectFourView.showJoin();
     }
 
+    public void joinGame(String ip, String port) {
+        try {
+            int portInt = Integer.parseInt(port);
+            game = gameRoom.joinGame(ip, portInt, this);
+            game.start();
+        } catch (NumberFormatException e) {
+            connectFourView.showError("Erreur conversion du port");
+        } catch (IOException e) {
+            connectFourView.showError("Impossible de rejoindre la partie");
+        }
+    }
+
     public void play(int columnIndex) {
         game.play(columnIndex);
     }
