@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="119.0" fitWidth="326.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/connect_four_logo.png" />
          </image>
          <VBox.margin>
-            <Insets bottom="30.0" />
+            <Insets bottom="20.0" />
          </VBox.margin>
       </ImageView>
       <Button mnemonicParsing="false" onAction="#handleClickPlayAgainstComputerBtn" text="Play against computer">
@@ -23,14 +23,23 @@
             <Font size="17.0" />
          </font>
          <VBox.margin>
-            <Insets bottom="10.0" />
+            <Insets />
          </VBox.margin>
          <styleClass>
             <String fx:value="btn" />
             <String fx:value="btn-transparent" />
          </styleClass>
       </Button>
-      <Button mnemonicParsing="false" text="Play with a friend">
+      <Button mnemonicParsing="false" onAction="#handleClickPlayWithFriend" text="Play with a friend">
+         <font>
+            <Font size="17.0" />
+         </font>
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-transparent" />
+         </styleClass>
+      </Button>
+      <Button mnemonicParsing="false" onAction="#handleClickJoinGame" text="Join a game">
          <font>
             <Font size="17.0" />
          </font>
