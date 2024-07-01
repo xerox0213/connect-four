@@ -2,5 +2,7 @@ package game.dto;
 
 import game.model.Token;
 
-public record GameDto(PlayerDto you, PlayerDto opponent, Token[][] tokens, long roundTime) {
+import java.io.Serializable;
+
+public record GameDto(PlayerDto you, PlayerDto opponent, Token[][] tokens, long roundTime) implements Serializable {
 }

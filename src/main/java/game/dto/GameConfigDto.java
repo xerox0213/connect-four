@@ -5,5 +5,7 @@ import game.model.FirstPlayer;
 import game.model.PlayerTime;
 import game.model.RoundTime;
 
-public record GameConfigDto(BoardSize boardSize, PlayerTime playerTime, RoundTime roundTime, FirstPlayer firstPlayer) {
+import java.io.Serializable;
+
+public record GameConfigDto(BoardSize boardSize, PlayerTime playerTime, RoundTime roundTime, FirstPlayer firstPlayer) implements Serializable {
 }
