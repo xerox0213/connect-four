@@ -1,14 +1,13 @@
 package game.presenter;
 
-import game.dto.GameConfigDto;
-import game.dto.GameDto;
-import game.dto.MoveDto;
-import game.dto.PlayerDto;
+import game.dto.*;
 import game.model.Game;
 import game.model.GameRoom;
 import game.oo.ConnectFourEvent;
 import game.oo.Observer;
 import game.view.ConnectFourView;
+
+import java.io.IOException;
 
 public class ConnectFourPresenter implements Observer {
     private final GameRoom gameRoom;
@@ -38,6 +37,13 @@ public class ConnectFourPresenter implements Observer {
         if (isItAgainstComputer) {
             game = gameRoom.playAgainstComputer(gameConfigDto, this);
             game.start();
+        } else {
+            try {
+                game = gameRoom.playWithFriend(gameConfigDto, this);
+                game.start();
+            } catch (IOException ioe) {
+                connectFourView.showError("Impossible de créer une partie en ligne");
+            }
         }
     }
 
