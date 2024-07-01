@@ -47,6 +47,10 @@ public class ConnectFourPresenter implements Observer {
         }
     }
 
+    public void showJoin() {
+        connectFourView.showJoin();
+    }
+
     public void play(int columnIndex) {
         game.play(columnIndex);
     }
