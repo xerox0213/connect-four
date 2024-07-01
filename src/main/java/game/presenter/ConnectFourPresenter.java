@@ -93,6 +93,9 @@ public class ConnectFourPresenter implements Observer {
             connectFourView.showGameOver();
         } else if (e == ConnectFourEvent.GAME_DRAW) {
             connectFourView.showDraw();
+        } else if (e == ConnectFourEvent.CONNECT_FOUR_SERVER_STARTED) {
+            ServerConnectionDto serverConnectionDto = (ServerConnectionDto) data;
+            connectFourView.showWaitingForOpponent(serverConnectionDto.ip(), serverConnectionDto.port());
         }
     }
 }
