@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashSet;
 
 public class Main extends Application {
 
@@ -21,16 +22,19 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         GameFactory gameFactory = new GameFactory();
-        GameRoom gameRoom = new GameRoom(gameFactory);
+        GameRoom gameRoom = new GameRoom(gameFactory, new HashSet<>());
         ConnectFourPresenter connectFourPresenter = new ConnectFourPresenter(gameRoom);
+        gameRoom.addObserver(connectFourPresenter);
 
         Parent parent = getRootJfxHomeCtrl(connectFourPresenter);
         Scene scene = new Scene(parent, 800, 700);
         JfxMenuCtrl jfxMenuCtrl = createJfxMenuCtrl(scene, connectFourPresenter);
         JfxConfigCtrl jfxConfigCtrl = createJfxConfigCtrl(connectFourPresenter);
+        JfxJoinCtrl jfxJoinCtrl = createJfxJoinCtrl(connectFourPresenter);
+        JfxWaitingCtrl jfxWaitingCtrl = createJfxWaitingCtrl(scene, connectFourPresenter);
         JfxGameCtrl jfxGameCtrl = createJfxGameCtrl(scene, connectFourPresenter);
         JfxEndCtrl jfxEndCtrl = createJfxEndCtrl(scene, connectFourPresenter);
-        JfxConnectFourView jfxConnectFourView = new JfxConnectFourView(jfxMenuCtrl, jfxConfigCtrl, jfxGameCtrl, jfxEndCtrl);
+        JfxConnectFourView jfxConnectFourView = new JfxConnectFourView(jfxMenuCtrl, jfxConfigCtrl, jfxJoinCtrl, jfxGameCtrl, jfxEndCtrl, jfxWaitingCtrl);
         connectFourPresenter.setConnectFourView(jfxConnectFourView);
 
         scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
@@ -65,6 +69,27 @@ public class Main extends Application {
         Parent parent = loader.load();
         modalStrategy.initModal(parent);
         return jfxConfigCtrl;
+    }
+
+    private JfxJoinCtrl createJfxJoinCtrl(ConnectFourPresenter cfp) throws IOException {
+        ModalStrategy modalStrategy = new ModalStrategy();
+        JfxJoinCtrl jfxJoinCtrl = new JfxJoinCtrl(modalStrategy, cfp);
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("./fxml/join.fxml"));
+        loader.setController(jfxJoinCtrl);
+        Parent parent = loader.load();
+        modalStrategy.initModal(parent);
+        return jfxJoinCtrl;
+    }
+
+    private JfxWaitingCtrl createJfxWaitingCtrl(Scene mainScene, ConnectFourPresenter cfp) throws IOException {
+        SceneStrategy sceneStrategy = new SceneStrategy();
+        JfxWaitingCtrl jfxWaitingCtrl = new JfxWaitingCtrl(sceneStrategy, cfp);
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("./fxml/waiting.fxml"));
+        loader.setController(jfxWaitingCtrl);
+        Parent parent = loader.load();
+        sceneStrategy.setParent(parent);
+        sceneStrategy.setScene(mainScene);
+        return jfxWaitingCtrl;
     }
 
     private JfxGameCtrl createJfxGameCtrl(Scene mainScene, ConnectFourPresenter cfp) throws IOException {
