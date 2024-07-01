@@ -16,4 +16,8 @@ public class JfxMenuCtrl extends Showable {
         connectFourPresenter.configureGame(true);
     }
 
+    @FXML
+    private void handleClickPlayWithFriend() {
+        connectFourPresenter.configureGame(false);
+    }
 }
