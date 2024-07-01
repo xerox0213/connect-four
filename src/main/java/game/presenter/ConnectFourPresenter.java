@@ -82,6 +82,12 @@ public class ConnectFourPresenter implements Observer {
         }
     }
 
+    public void cancelGame() {
+        gameRoom.cancelGameWithFriend();
+        connectFourView.showMenu();
+        game = null;
+    }
+
     @Override
     public void update(ConnectFourEvent e, Object data) {
         if (e == ConnectFourEvent.GAME_INIT) {
