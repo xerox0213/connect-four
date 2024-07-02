@@ -21,7 +21,10 @@ public class ConnectFourPresenter implements Observer {
 
     public void setPlayerName(String playerName) {
         if (playerName.isEmpty()) {
-            connectFourView.showError("Enter a valid player name !");
+            String title = "Invalid input";
+            String header = "Invalid player name";
+            String content = "The name should not be empty.";
+            connectFourView.showError(title, header, content);
         } else {
             gameRoom.setMyPlayerName(playerName);
             showMenu();
@@ -42,7 +45,10 @@ public class ConnectFourPresenter implements Observer {
                 game = gameRoom.playWithFriend(gameConfigDto, this);
                 game.start();
             } catch (IOException ioe) {
-                connectFourView.showError("Impossible de créer une partie en ligne");
+                String title = "Game error";
+                String header = "Unable to create game";
+                String content = "It is impossible to create a game. Please try again.";
+                connectFourView.showError(title, header, content);
             }
         }
     }
@@ -57,9 +63,15 @@ public class ConnectFourPresenter implements Observer {
             game = gameRoom.joinGame(ip, portInt, this);
             game.start();
         } catch (NumberFormatException e) {
-            connectFourView.showError("Erreur conversion du port");
+            String title = "Invalid input";
+            String header = "Invalid port number";
+            String content = "Port number must be a numeric value.";
+            connectFourView.showError(title, header, content);
         } catch (IOException e) {
-            connectFourView.showError("Impossible de rejoindre la partie");
+            String title = "Connection error";
+            String header = "Unable to join game";
+            String content = "It was not possible to join the game. Please check your network connection and try again.";
+            connectFourView.showError(title, header, content);
         }
     }
 

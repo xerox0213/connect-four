@@ -20,7 +20,7 @@ public interface ConnectFourView {
 
     void showDraw();
 
-    void showError(String error);
+    void showError(String title, String header, String error);
 
     void updateBoard(Token token, int columnIndex, int rowIndex);
 

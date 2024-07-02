@@ -3,6 +3,7 @@ package game.view.jfx;
 import game.dto.GameDto;
 import game.model.Token;
 import game.view.ConnectFourView;
+import javafx.scene.control.Alert;
 
 public class JfxConnectFourView implements ConnectFourView {
     private final JfxMenuCtrl jfxMenuCtrl;
@@ -64,8 +65,12 @@ public class JfxConnectFourView implements ConnectFourView {
     }
 
     @Override
-    public void showError(String error) {
-        System.out.println(error);
+    public void showError(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     @Override
