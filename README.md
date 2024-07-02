@@ -19,7 +19,7 @@ friend online.
 
 ## Usage
 
-1. Launch the game by following the installation instructions.
+1. Launch the game in an IDE.
 2. Enter your player name.
 3. Choose one of the following three options:
     - **Play against computer**
