@@ -15,7 +15,6 @@ public class ConnectFourPresenter implements Observer {
     private Game game;
     private ConnectFourView connectFourView;
     private Token playerId;
-    private boolean isItAgainstComputer;
 
     public ConnectFourPresenter(GameRoom gameRoom) {
         this.gameRoom = gameRoom;
@@ -34,24 +33,19 @@ public class ConnectFourPresenter implements Observer {
     }
 
     public void configureGame(boolean isItAgainstComputer) {
-        this.isItAgainstComputer = isItAgainstComputer;
+        gameRoom.setAgainstComputer(isItAgainstComputer);
         connectFourView.showConfigurator();
     }
 
     public void createGame(GameConfigDto gameConfigDto) {
-        if (isItAgainstComputer) {
-            game = gameRoom.playAgainstComputer(gameConfigDto, this);
+        try {
+            this.game = gameRoom.createGame(gameConfigDto, this);
             game.start();
-        } else {
-            try {
-                game = gameRoom.playWithFriend(gameConfigDto, this);
-                game.start();
-            } catch (IOException ioe) {
-                String title = "Game error";
-                String header = "Unable to create game";
-                String content = "It is impossible to create a game. Please try again.";
-                connectFourView.showError(title, header, content);
-            }
+        } catch (IOException ioe) {
+            String title = "Game error";
+            String header = "Unable to create game";
+            String content = "It is impossible to create a game. Please try again.";
+            connectFourView.showError(title, header, content);
         }
     }
 

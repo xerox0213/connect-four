@@ -19,6 +19,7 @@ import java.util.Set;
 public class GameRoom implements Observable {
     private String playerName;
     private final GameFactory gameFactory;
+    private boolean againstComputer;
     private final Set<Observer> observers;
     private ConnectFourServer connectFourServer;
 
@@ -31,21 +32,44 @@ public class GameRoom implements Observable {
         this.playerName = playerName;
     }
 
-    public Game playAgainstComputer(GameConfigDto gameConfigDto, Observer presenterObserver) {
+
+    public Game createGame(GameConfigDto gameConfigDto, Observer presenterObserver) throws IOException {
+        if (againstComputer) {
+            return playAgainstComputer(gameConfigDto, presenterObserver);
+        } else {
+            return playWithFriend(gameConfigDto, presenterObserver);
+        }
+    }
+
+    public Game joinGame(String ip, int port, Observer presenterObserver) throws IOException {
+        return createPlayerSocket(ip, port, RolePlayer.GUEST, null, presenterObserver);
+    }
+
+    @Override
+    public void addObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void notifyObservers(ConnectFourEvent e, Object data) {
+        observers.forEach(o -> o.update(e, data));
+    }
+
+    public void setAgainstComputer(boolean againstComputer) {
+        this.againstComputer = againstComputer;
+    }
+
+    private Game playAgainstComputer(GameConfigDto gameConfigDto, Observer presenterObserver) {
         return gameFactory.createGameAgainstComputer(gameConfigDto, playerName, presenterObserver, "Bip Boop");
     }
 
-    public Game playWithFriend(GameConfigDto gameConfigDto, Observer presenterObserver) throws IOException {
+    private Game playWithFriend(GameConfigDto gameConfigDto, Observer presenterObserver) throws IOException {
         ServerSocket serverSocket = new ServerSocket(8080);
         this.connectFourServer = new ConnectFourServer(serverSocket, new ArrayList<>());
         connectFourServer.runServer();
         notifyObservers(ConnectFourEvent.CONNECT_FOUR_SERVER_STARTED, new ServerConnectionDto("localhost", "8080"));
 
         return createPlayerSocket("localhost", 8080, RolePlayer.HOST, gameConfigDto, presenterObserver);
-    }
-
-    public Game joinGame(String ip, int port, Observer presenterObserver) throws IOException {
-        return createPlayerSocket(ip, port, RolePlayer.GUEST, null, presenterObserver);
     }
 
     private PlayerSocket createPlayerSocket(String ip, int port, RolePlayer rolePlayer, GameConfigDto gameConfigDto, Observer presenterObserver) throws IOException {
@@ -59,15 +83,5 @@ public class GameRoom implements Observable {
         socketHandler.setMsgHandler(playerSocket);
 
         return playerSocket;
-    }
-
-    @Override
-    public void addObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void notifyObservers(ConnectFourEvent e, Object data) {
-        observers.forEach(o -> o.update(e, data));
     }
 }
