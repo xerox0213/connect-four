@@ -5,5 +5,5 @@ public interface Game {
 
     void play(int columnIndex);
 
-    void stop();
+    void stop(Token playerId);
 }

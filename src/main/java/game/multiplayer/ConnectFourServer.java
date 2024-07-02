@@ -5,6 +5,7 @@ import game.dto.SocketMsgDto;
 import game.dto.RemotePlayerDataDto;
 import game.model.Game;
 import game.model.GameFactory;
+import game.model.Token;
 import game.oo.Observer;
 
 import java.io.IOException;
@@ -35,14 +36,6 @@ public class ConnectFourServer implements MsgHandler {
         thread.start();
     }
 
-    public void stopServer() {
-        socketHandlers.forEach(SocketHandler::close);
-        try {
-            serverSocket.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
 
     @Override
     synchronized public void handleMessage(SocketHandler source, SocketMsgDto<?> input) {
@@ -50,6 +43,7 @@ public class ConnectFourServer implements MsgHandler {
         switch (socketEvent) {
             case REMOTE_PLAYER_DATA -> setPlayerData(input);
             case PLAY -> play(input);
+            case STOP -> stopServer(input);
         }
     }
 
@@ -75,7 +69,6 @@ public class ConnectFourServer implements MsgHandler {
 
                 playerNumber++;
             } catch (IOException ioe) {
-                stopServer();
                 return;
             }
         }
@@ -121,5 +114,17 @@ public class ConnectFourServer implements MsgHandler {
     private void play(SocketMsgDto<?> input) {
         int columnIndex = (int) input.data();
         game.play(columnIndex);
+    }
+
+    private void stopServer(SocketMsgDto<?> input) {
+        Token playerId = (Token) input.data();
+
+        if (game != null) game.stop(playerId);
+        socketHandlers.forEach(SocketHandler::close);
+        try {
+            serverSocket.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
     }
 }

@@ -5,6 +5,7 @@ import game.dto.PlayerDto;
 import game.exception.ConnectFourException;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public class PlayerManager {
     private final List<Player> players;
@@ -39,6 +40,10 @@ public class PlayerManager {
 
     public boolean hasCurrentPlayerTimeLeft() {
         return players.get(indexCurrPlayer).isTimeLeft();
+    }
+
+    public void giveUp(Token playerId) {
+        players.stream().filter(p -> p.getToken() != playerId).forEach(Player::notifyPlayerWon);
     }
 
     public void declareCurrPlayerWinner() {

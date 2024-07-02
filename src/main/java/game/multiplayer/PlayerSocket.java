@@ -2,6 +2,7 @@ package game.multiplayer;
 
 import game.dto.*;
 import game.model.Game;
+import game.model.Token;
 import game.oo.ConnectFourEvent;
 import game.oo.Observable;
 import game.oo.Observer;
@@ -48,7 +49,8 @@ public class PlayerSocket implements Game, Observable, MsgHandler {
     }
 
     @Override
-    public void stop() {
+    public void stop(Token playerId) {
+        send(SocketEvent.STOP, playerId);
     }
 
     @Override

@@ -44,10 +44,6 @@ public class GameRoom implements Observable {
         return createPlayerSocket("localhost", 8080, RolePlayer.HOST, gameConfigDto, presenterObserver);
     }
 
-    public void cancelGameWithFriend() {
-        connectFourServer.stopServer();
-    }
-
     public Game joinGame(String ip, int port, Observer presenterObserver) throws IOException {
         return createPlayerSocket(ip, port, RolePlayer.GUEST, null, presenterObserver);
     }

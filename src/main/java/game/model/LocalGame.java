@@ -43,7 +43,8 @@ public class LocalGame implements Game {
     }
 
     @Override
-    public void stop() {
+    public void stop(Token playerId) {
         roundTimer.stop();
+        playerManager.giveUp(playerId);
     }
 }

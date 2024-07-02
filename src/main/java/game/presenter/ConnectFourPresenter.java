@@ -3,6 +3,7 @@ package game.presenter;
 import game.dto.*;
 import game.model.Game;
 import game.model.GameRoom;
+import game.model.Token;
 import game.oo.ConnectFourEvent;
 import game.oo.Observer;
 import game.view.ConnectFourView;
@@ -13,6 +14,7 @@ public class ConnectFourPresenter implements Observer {
     private final GameRoom gameRoom;
     private Game game;
     private ConnectFourView connectFourView;
+    private Token playerId;
     private boolean isItAgainstComputer;
 
     public ConnectFourPresenter(GameRoom gameRoom) {
@@ -89,14 +91,14 @@ public class ConnectFourPresenter implements Observer {
 
     public void interruptGame() {
         if (game != null) {
-            game.stop();
+            game.stop(playerId);
             showMenu();
         }
     }
 
     public void cancelGame() {
-        gameRoom.cancelGameWithFriend();
-        connectFourView.showMenu();
+        game.stop(playerId);
+        showMenu();
         game = null;
     }
 
@@ -104,6 +106,7 @@ public class ConnectFourPresenter implements Observer {
     public void update(ConnectFourEvent e, Object data) {
         if (e == ConnectFourEvent.GAME_INIT) {
             GameDto gameDto = (GameDto) data;
+            this.playerId = gameDto.you().token();
             connectFourView.showGame(gameDto);
         } else if (e == ConnectFourEvent.MY_TURN) {
             connectFourView.updatePlayerTurn(true);
