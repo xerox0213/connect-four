@@ -18,7 +18,7 @@ public class JfxWaitingCtrl extends Showable {
 
     @FXML
     public void handleClickCancelBtn() {
-        connectFourPresenter.cancelGame();
+        connectFourPresenter.interruptGame();
     }
 
     public void init(String ip, String port) {

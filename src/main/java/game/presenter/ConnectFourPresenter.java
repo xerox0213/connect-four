@@ -93,13 +93,8 @@ public class ConnectFourPresenter implements Observer {
         if (game != null) {
             game.stop(playerId);
             showMenu();
+            game = null;
         }
-    }
-
-    public void cancelGame() {
-        game.stop(playerId);
-        showMenu();
-        game = null;
     }
 
     @Override
