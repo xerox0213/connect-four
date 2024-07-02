@@ -83,7 +83,7 @@ class LocalGameTest {
     }
 
     @Test
-    void testStartShouldStartTheGame(){
+    void testStartShouldStartTheGame() {
         Token[][] tokens = new Token[1][1];
         Mockito.lenient().when(board.getCopyTokens()).thenReturn(tokens);
         LocalGame localGame = new LocalGame(board, playerManager, roundTimer);
@@ -91,5 +91,16 @@ class LocalGameTest {
         Mockito.verify(board, Mockito.times(1)).getCopyTokens();
         Mockito.verify(playerManager, Mockito.times(1)).notifyGameStart(tokens, 1000);
         Mockito.verify(roundTimer, Mockito.times(1)).start();
+    }
+
+    @Test
+    void testStopShouldStopTheGame() {
+        Token[][] tokens = new Token[1][1];
+        Mockito.lenient().when(board.getCopyTokens()).thenReturn(tokens);
+        LocalGame localGame = new LocalGame(board, playerManager, roundTimer);
+        Token playerId = Token.BLUE;
+        localGame.stop(playerId);
+        Mockito.verify(roundTimer, Mockito.times(1)).stop();
+        Mockito.verify(playerManager, Mockito.times(1)).giveUp(playerId);
     }
 }
