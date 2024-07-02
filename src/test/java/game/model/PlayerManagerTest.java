@@ -1,6 +1,5 @@
 package game.model;
 
-import game.dto.GameDto;
 import game.dto.PlayerDto;
 import game.exception.ConnectFourError;
 import game.exception.ConnectFourException;
@@ -27,6 +26,7 @@ class PlayerManagerTest {
     void setUp() throws ConnectFourException {
         ConnectFourException e = new ConnectFourException(ConnectFourError.NO_TIME_LEFT);
         Mockito.lenient().doThrow(e).when(zelda).reduceTime(1000);
+        Mockito.lenient().when(link.getToken()).thenReturn(Token.BLUE);
         Mockito.lenient().when(zelda.getToken()).thenReturn(Token.RED);
         Mockito.lenient().when(link.isTimeLeft()).thenReturn(true);
         Mockito.lenient().when(link.getPlayerDto()).thenReturn(new PlayerDto("link", Token.RED, 5000));
@@ -123,5 +123,15 @@ class PlayerManagerTest {
         boolean hasCurrentPlayerTimeLeft = playerManager.hasCurrentPlayerTimeLeft();
         Mockito.verify(link, Mockito.times(1)).isTimeLeft();
         assertTrue(hasCurrentPlayerTimeLeft);
+    }
+
+    @Test
+    void testGiveUpShouldNotifyOpponentHasWon() {
+        List<Player> players = new ArrayList<>(List.of(link, zelda));
+        PlayerManager playerManager = new PlayerManager(players, 0);
+        Token playerId = Token.BLUE;
+        playerManager.giveUp(playerId);
+        Mockito.verify(link, Mockito.times(0)).notifyPlayerWon();
+        Mockito.verify(zelda, Mockito.times(1)).notifyPlayerWon();
     }
 }
