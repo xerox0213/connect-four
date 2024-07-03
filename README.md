@@ -17,9 +17,41 @@ friend online.
 - Game configuration: Customize game settings such as board size, total game time per player, time per round, and the first player to start.
 - Error handling and edge case management: Robust handling of errors and edge cases to ensure a smooth gameplay experience.
 
+## Installation
+Sure, here is the README content in English:
+
+### Prerequisites
+
+- **Java JDK 21** must be installed and configured on your machine.
+- **Apache Maven** must be installed and configured.
+
+### Installation steps
+
+1. **Clone the repository**
+
+   Clone the repository to your local machine using the following command:
+   ```sh
+   git clone <repository-url>
+   cd <project-directory-name>
+   ```
+
+2. **Build the project with Maven**
+
+   Navigate to the project directory and use Maven to build the project:
+   ```sh
+   mvn clean install
+   ```
+
+3. **Run the project**
+
+   To run the project, use the following command:
+   ```sh
+   mvn javafx:run
+   ```
+   
 ## Usage
 
-1. Launch the game in an IDE.
+1. Launch the game.
 2. Enter your player name.
 3. Choose one of the following three options:
     - **Play against computer**
