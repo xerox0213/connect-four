@@ -13,11 +13,11 @@ friend online.
 
 ## Features
 
-- **Play solo** : Challenge the computer in a single-player mode.
-- **Play with a friend** : Connect and play against your friend online.
-- **Game configuration** : Customize game settings such as board size, total game time per player, time per round, and the
+- **Play solo:** Challenge the computer in a single-player mode.
+- **Play with a friend:** Connect and play against your friend online.
+- **Game configuration:** Customize game settings such as board size, total game time per player, time per round, and the
   first player to start.
-- **Error handling and edge case management** : Robust handling of errors and edge cases to ensure a smooth gameplay
+- **Error handling and edge case management:** Robust handling of errors and edge cases to ensure a smooth gameplay
   experience.
 
 ## Installation
@@ -86,10 +86,10 @@ friend online.
 
 ## Technologies used
 
-- **Java** : Main programming language.
-- **JavaFX** : For the graphical user interface.
-- **Java Sockets** : For network communication in multiplayer mode.
-- **JUnit + Mockito** : For unit testing.
+- **Java:** Main programming language.
+- **JavaFX:** For the graphical user interface.
+- **Java Sockets:** For network communication in multiplayer mode.
+- **JUnit + Mockito:** For unit testing.
 
 ## Contributors
 
