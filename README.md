@@ -18,7 +18,6 @@ friend online.
 - Error handling and edge case management: Robust handling of errors and edge cases to ensure a smooth gameplay experience.
 
 ## Installation
-Sure, here is the README content in English:
 
 ### Prerequisites
 
