@@ -13,11 +13,11 @@ friend online.
 
 ## Features
 
-- Play solo: Challenge the computer in a single-player mode.
-- Play with a friend: Connect and play against your friend online.
-- Game configuration: Customize game settings such as board size, total game time per player, time per round, and the
+- **Play solo** : Challenge the computer in a single-player mode.
+- **Play with a friend** : Connect and play against your friend online.
+- **Game configuration** : Customize game settings such as board size, total game time per player, time per round, and the
   first player to start.
-- Error handling and edge case management: Robust handling of errors and edge cases to ensure a smooth gameplay
+- **Error handling and edge case management** : Robust handling of errors and edge cases to ensure a smooth gameplay
   experience.
 
 ## Installation
