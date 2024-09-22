@@ -1,7 +1,7 @@
 # Connect 4 in Java
 
 Welcome to the Connect 4 project in Java! This project is a Connect 4 game that can be played against a computer or a
-friend online.
+friend online (only on the same network).
 
 ## Table of contents
 
